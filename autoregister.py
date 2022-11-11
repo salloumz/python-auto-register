@@ -31,6 +31,6 @@ driver.get("https://lionpath.psu.edu/")
 
 input('Press enter to continue after logging in')
 
-
+search_button = driver.find_element_by_class_name("Enrollment")
 
 driver.close
