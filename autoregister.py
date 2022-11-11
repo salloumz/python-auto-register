@@ -41,6 +41,10 @@ time.sleep(1)
 # enrollment_button.click
 # enrollment_button.click
 
+# hit the enrollment button
+driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
+time.sleep(5)
+# driver.sleep fix this pls
 
 
 
