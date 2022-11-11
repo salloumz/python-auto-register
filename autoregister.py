@@ -32,9 +32,9 @@ chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Su
 
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
 
-driver.get("brave://newtab")
+driver.get("https://lionpath.psu.edu/")
 
-time.wait(15)
+input('Press enter to continue after logging in')
 
 
 
