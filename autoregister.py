@@ -4,4 +4,4 @@ import pyautogui
 
 from selenium.webdriver.chrome.service import Service
 
-option = webdriver.ChromeOptions()
+chromeoptions = webdriver.ChromeOptions()
