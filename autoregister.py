@@ -24,11 +24,6 @@ elif platform == "darwin":
 else:
     print('Unsupported operating system')
 
-# MacOS
-chromedriver = "/opt/homebrew/bin/chromedriver"
-chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
-
 
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
 
