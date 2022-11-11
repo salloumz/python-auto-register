@@ -34,8 +34,9 @@ driver.get(lionpath)
 input('Press enter to continue after logging in')
 time.sleep(1)
 
-enrollment_button = driver.find_element(By.ID, "PE_UI020_BTNS_PE_GRID_BUTTON$1")
-# enrollment_button = driver.find_element(By.LINK_TEXT, "Enrollment")
+enrollment_button = driver.find_element(By.ID, "win0divPE_UI020_BTNS_PE_GRID_BUTTON$1")
+
+# enrollment_button = driver.find_element(By.NAME, "Enrollment")
 print(enrollment_button)
 enrollment_button.click
 
