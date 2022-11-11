@@ -42,8 +42,10 @@ time.sleep(1)
 # enrollment_button.click
 
 # hit the enrollment button
+
 driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
 time.sleep(5)
+driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
 # driver.sleep fix this pls
 
 
