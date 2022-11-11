@@ -14,3 +14,6 @@ chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Su
 
 driver = webdriver.Chrome(service=Service(chromedriver))
 
+driver.get("brave://newtab")
+
+
