@@ -8,14 +8,21 @@ from selenium.webdriver.chrome.service import Service
 chromeoptions = webdriver.ChromeOptions()
 
 if platform == "linux" or platform == "linux2":
-    # linux
-    print('linux')
+    # Linux
+    print('Linux')
+    chromedriver = "/usr/bin/chromedriver"
+    chromeoptions.binary_location = '/usr/lib/brave-bin/brave'
+    chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
+    chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
+    chromeoptions.add_argument("--enable-gpu-rasterization")
 elif platform == "darwin":
-    # OS X
+    # MacOS
     print('macOS')
-elif platform == "win32":
-    # Windows...
-    print('windows')
+    chromedriver = "/opt/homebrew/bin/chromedriver"
+    chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+    chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
+else:
+    print('Unsupported operating system')
 
 # MacOS
 chromedriver = "/opt/homebrew/bin/chromedriver"
