@@ -30,7 +30,9 @@ driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
 driver.get("https://lionpath.psu.edu/")
 
 input('Press enter to continue after logging in')
+time.sleep(1)
 
-search_button = driver.find_element_by_class_name("Enrollment")
+enrollment_button = chromedriver.find_element_by_link_text("Enrollment")
+enrollment_button.click
 
 driver.close
