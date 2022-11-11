@@ -1,4 +1,5 @@
-from selenium import webdriver 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 from sys import platform
 import time
 import pyautogui
@@ -26,7 +27,6 @@ else:
 
 
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
-
 lionpath = "https://lionpath.psu.edu/"
 driver.get(lionpath)
 
@@ -35,6 +35,9 @@ input('Press enter to continue after logging in')
 time.sleep(1)
 
 enrollment_button = driver.find_element(By.ID, "PE_UI020_BTNS_PE_GRID_BUTTON$1")
-enrollment_button.click
+print(enrollment_button)
+# enrollment_button.click
+
+time.sleep(1)
 
 driver.close
