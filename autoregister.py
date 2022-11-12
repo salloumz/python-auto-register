@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from sys import platform
 import time
 import pyautogui
@@ -48,8 +49,20 @@ driver.find_element(By.NAME, 'loginfmt').send_keys(username)
 # Click next
 driver.find_element(By.ID, 'idSIButton9').click
 
+# Wait
+time.sleep(1)
+
 # Type password
-driver.find_element(By.NAME, 'loginfmt').send_keys(password)
+driver.find_element(By.NAME, 'passwd').send_keys(password)
+
+# Wait for duo auth to show up
+time.sleep(2)
+
+# Select iOS
+duoSelect = Select(driver.find_element(By.NAME, 'device'))
+
+duoSelect.select_by_visible_text('iOS')
+
 
 input('Press enter to continue after logging in')
 time.sleep(1)
