@@ -30,6 +30,26 @@ driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
 lionpath = "https://lionpath.psu.edu/"
 driver.get(lionpath)
 
+# grab username from file
+usernameFile = open('username.txt', 'r')
+username = usernameFile.read()
+usernameFile.close()
+
+# get password from file lmao
+passwordFile = open('password.txt', 'r')
+password = passwordFile.read()
+passwordFile.close()
+
+# Login
+
+# Type username
+driver.find_element(By.NAME, 'loginfmt').send_keys(username)
+
+# Click next
+driver.find_element(By.ID, 'idSIButton9').click
+
+# Type password
+driver.find_element(By.NAME, 'loginfmt').send_keys(password)
 
 input('Press enter to continue after logging in')
 time.sleep(1)
