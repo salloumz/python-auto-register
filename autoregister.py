@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
 from sys import platform
 import time
 import pyautogui
@@ -56,7 +59,7 @@ time.sleep(1)
 driver.find_element(By.NAME, 'passwd').send_keys(password)
 
 # Wait for duo auth to show up
-time.sleep(4)
+myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'device')))
 
 # Select iOS
 duoSelect = Select(driver.find_element(By.NAME, 'device'))
@@ -64,7 +67,8 @@ duoSelect.select_by_visible_text('iOS')
 
 # Send push
 duoPush = driver.find_element(By.XPATH, '//*[@id="auth_methods"]/fieldset[1]/div[1]/button')
-duoPush.click
+ActionChains(driver).click(duoPush).perform()
+# duoPush.click
 
 
 
