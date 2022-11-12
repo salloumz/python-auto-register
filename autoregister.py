@@ -56,12 +56,16 @@ time.sleep(1)
 driver.find_element(By.NAME, 'passwd').send_keys(password)
 
 # Wait for duo auth to show up
-time.sleep(2)
+time.sleep(4)
 
 # Select iOS
 duoSelect = Select(driver.find_element(By.NAME, 'device'))
-
 duoSelect.select_by_visible_text('iOS')
+
+# Send push
+duoPush = driver.find_element(By.XPATH, '//*[@id="auth_methods"]/fieldset[1]/div[1]/button')
+duoPush.click
+
 
 
 input('Press enter to continue after logging in')
