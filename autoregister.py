@@ -87,7 +87,8 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'PE_UI020
 
 driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
 
-# Wait until next page is loaded
+# Wait until next page is loaded, specifically the shopping cart button
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
 
 # Trying to hit shopping cart button
 # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
