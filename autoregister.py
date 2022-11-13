@@ -70,8 +70,8 @@ duoPush = driver.find_element(By.XPATH, '//*[@id="auth_methods"]/fieldset[1]/div
 ActionChains(driver).click(duoPush).perform()
 # duoPush.click
 
-# Wait until lionpath is loaded, we are waiting for the enrollment button
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1')))
+# Wait until push accepted lionpath is loaded, we are waiting for the enrollment button
+WebDriverWait(driver, 240).until(EC.presence_of_element_located((By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1')))
 
 
 # input('Press enter to continue after logging in')
