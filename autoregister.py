@@ -59,7 +59,7 @@ time.sleep(1)
 driver.find_element(By.NAME, 'passwd').send_keys(password)
 
 # Wait for duo auth to show up
-myElem = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'device')))
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'device')))
 
 # Select iOS
 duoSelect = Select(driver.find_element(By.NAME, 'device'))
@@ -70,10 +70,10 @@ duoPush = driver.find_element(By.XPATH, '//*[@id="auth_methods"]/fieldset[1]/div
 ActionChains(driver).click(duoPush).perform()
 # duoPush.click
 
+# Wait until lionpath is loaded, we are waiting for the enrollment button
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1')))
 
-
-input('Press enter to continue after logging in')
-time.sleep(1)
+# input('Press enter to continue after logging in')
 
 # driver.find_element(By.ID, "win0divPE_UI020_BTNS_PE_GRID_BUTTON$1")
 # enrollment_button = driver.find_element(By.ID, "PE_UI020_BTNS_PE_GRID_BUTTON$span$1")
@@ -86,9 +86,20 @@ time.sleep(1)
 
 driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
 time.sleep(5)
+
 # Trying to hit shopping cart button
 # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
 # driver.sleep fix this pls
+shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+ActionChains(driver).click(shoppingCartButton).perform()
+
+# Semesters
+spring2023 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
+
+# Click current semester
+semester = spring2023
+ActionChains(driver).click(shoppingCartButton).perform()
+
 
 
 
