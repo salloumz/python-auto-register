@@ -19,13 +19,13 @@ if platform == "linux" or platform == "linux2":
     chromeoptions.binary_location = '/usr/lib/brave-bin/brave'
     chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
     chromeoptions.add_argument("--enable-gpu-rasterization")
-    chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
+    # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
 elif platform == "darwin":
     # MacOS
     print('macOS')
     chromedriver = "/opt/homebrew/bin/chromedriver"
     chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-    chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
+    # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
 else:
     print('Unsupported operating system')
 
@@ -90,7 +90,7 @@ driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BU
 # Wait until next page is loaded, specifically the shopping cart button
 # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
 
-time.sleep(3)
+time.sleep(4)
 
 # Trying to hit shopping cart button
 # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
@@ -106,6 +106,14 @@ spring2023 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td
 # Click current semester
 semester = spring2023
 ActionChains(driver).click(semester).perform()
+
+time.sleep(1)
+
+# Trying to hit shopping cart button
+# driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
+# driver.sleep fix this pls
+shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+ActionChains(driver).click(shoppingCartButton).perform()
 
 input('Press enter to continue after going to enroll key')
 time.sleep(1)
