@@ -46,6 +46,9 @@ passwordFile.close()
 
 # Login
 
+# Wait for login page
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'loginfmt')))
+
 # Type username
 driver.find_element(By.NAME, 'loginfmt').send_keys(username)
 
