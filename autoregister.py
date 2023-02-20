@@ -14,6 +14,7 @@ from selenium.webdriver.chrome.service import Service
 chromeoptions = webdriver.ChromeOptions()
 
 # TODO: Add support for Windows
+# TODO: Add support for other browsers
 if platform == "linux" or platform == "linux2":
     # Linux
     print('Linux')
