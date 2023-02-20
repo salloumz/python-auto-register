@@ -80,15 +80,12 @@ while not elementFound:
     # If duo detects browser is out of date, click the skip button
     # this code doesn't fully work yet, since the skip button is not always there
     # if driver.find_elements(By.NAME, 'Skip'):
-    print('Checking for skip button')
     if driver.find_elements(By.CSS_SELECTOR, 'body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable > span'):
-        print('Browser is out of date')
         skipButton = driver.find_element(By.CSS_SELECTOR, 'body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable > span')
         ActionChains(driver).click(skipButton).perform()
         # driver.execute_script(document.querySelector("body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable"))
     # else find the enrollment button
     elif driver.find_elements(By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1'):
-        print('Enrollment button found')
         elementFound = True
 
 
