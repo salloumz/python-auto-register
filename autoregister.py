@@ -123,6 +123,7 @@ ActionChains(driver).click(shoppingCartButton).perform()
 
 time.sleep(3)
 
+# TODO: add fall2023 support
 # Semesters
 spring2023 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
 
