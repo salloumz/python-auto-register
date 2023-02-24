@@ -77,8 +77,8 @@ duoPush = driver.find_element(By.XPATH, '//*[@id="auth_methods"]/fieldset[1]/div
 ActionChains(driver).click(duoPush).perform()
 # duoPush.click
 
-elementFound = False
-while not elementFound:
+enrollmentBtnFound = False
+while not enrollmentBtnFound:
     # If duo detects browser is out of date, click the skip button
     # this code doesn't fully work yet, since the skip button is not always there
     # if driver.find_elements(By.NAME, 'Skip'):
@@ -88,7 +88,7 @@ while not elementFound:
         # driver.execute_script(document.querySelector("body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable"))
     # else find the enrollment button
     elif driver.find_elements(By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1'):
-        elementFound = True
+        enrollmentBtnFound = True
 
 
 # Wait until push accepted lionpath is loaded, we are waiting for the enrollment button
