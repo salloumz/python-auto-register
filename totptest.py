@@ -3,7 +3,7 @@ import pyotp
 
 def generate_2fa_code(secret):
     # Create a TOTP object with the given secret
-    totp = pyotp.TOTP(secret, digits=6, hashfunc=hashlib.sha1)
+    totp = pyotp.TOTP(secret, digits=6, digest=hashlib.sha1)
 
     # Get the current TOTP code
     code = totp.now()
