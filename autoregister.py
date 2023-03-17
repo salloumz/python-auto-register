@@ -23,7 +23,7 @@ if platform == "linux" or platform == "linux2":
     chromeoptions.binary_location = '/usr/bin/brave'
     chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
     chromeoptions.add_argument("--enable-gpu-rasterization")
-    chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
+    # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
 elif platform == "darwin":
     # MacOS
     print('macOS')
