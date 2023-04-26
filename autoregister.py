@@ -52,7 +52,7 @@ passwordFile.close()
 
 # get totp token from file
 totpfile = open('totpsecret.txt', 'r')
-totp = totpfile.read()
+totpsecret = totpfile.read()
 totpfile.close()
 
 # Login
@@ -72,6 +72,15 @@ time.sleep(1)
 # Type password
 driver.find_element(By.NAME, 'passwd').send_keys(password)
 
+# Generate totp code
+# Create a TOTP object with the given secret
+totp = pyotp.TOTP(totpsecret, digits=6, digest=hashlib.sha1)
+
+# Get the current TOTP code
+totpcode = totp.now()
+
+# Type totp code
+driver.find_element(By.NAME, 'otc').send_keys(totpcode)
 
 enrollmentBtnFound = False
 while not enrollmentBtnFound:
