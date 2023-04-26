@@ -128,18 +128,9 @@ while not enrollmentBtnFound:
 
 driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
 
-# Wait until next page is loaded, specifically the shopping cart button
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
-
-
-
-# Trying to hit shopping cart button
-# driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
-# driver.sleep fix this pls
-
-# time.sleep(4)
 # this webdriverwait may be unstable
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
+# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
+time.sleep(4)
 shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
 ActionChains(driver).click(shoppingCartButton).perform()
 
