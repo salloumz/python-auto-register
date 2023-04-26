@@ -64,13 +64,20 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'loginf
 driver.find_element(By.NAME, 'loginfmt').send_keys(username)
 
 # Wait
-time.sleep(1)
+# time.sleep(1)
+
+# Wait for password page
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'passwd')))
 
 # Type password
 driver.find_element(By.NAME, 'passwd').send_keys(password)
+time.sleep(1)
 
-# Wait
-time.sleep(2)
+# Send enter key
+driver.find_element(By.NAME, 'passwd').send_keys(u'\ue007')
+
+
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'otc')))
 
 # Generate totp code
 # Create a TOTP object with the given secret
@@ -130,7 +137,9 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.P
 # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
 # driver.sleep fix this pls
 
-time.sleep(4)
+# time.sleep(4)
+# this webdriverwait may be unstable
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
 shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
 ActionChains(driver).click(shoppingCartButton).perform()
 
