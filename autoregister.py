@@ -81,6 +81,8 @@ totpcode = totp.now()
 
 # Type totp code
 driver.find_element(By.NAME, 'otc').send_keys(totpcode)
+# Send enter key
+driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
 
 
 
