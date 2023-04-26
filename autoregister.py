@@ -22,7 +22,7 @@ if platform == "linux" or platform == "linux2":
     # Linux
     print('Linux')
     chromedriver = "/usr/bin/chromedriver"
-    chromeoptions.binary_location = '/usr/lib/brave-bin/brave'
+    chromeoptions.binary_location = '/usr/bin/brave'
     chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
     chromeoptions.add_argument("--enable-gpu-rasterization")
     # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
@@ -113,7 +113,11 @@ while not enrollmentBtnFound:
 
 # hit the enrollment button
 
-driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
+# driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
+
+# go to the enrolllment page
+
+driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
 
 # Wait until next page is loaded, specifically the shopping cart button
 # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
