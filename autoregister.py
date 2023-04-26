@@ -63,9 +63,6 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'loginf
 # Type username
 driver.find_element(By.NAME, 'loginfmt').send_keys(username)
 
-# Click next
-# driver.find_element(By.ID, 'idSIButton9').click
-
 # Wait
 time.sleep(1)
 
@@ -85,8 +82,6 @@ totpcode = totp.now()
 # Type totp code
 driver.find_element(By.NAME, 'otc').send_keys(totpcode)
 
-# Click Submit
-# driver.find_element(By.ID, 'idSubmit_SAOTCC_Continue').click
 
 
 enrollmentBtnFound = False
