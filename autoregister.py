@@ -136,12 +136,14 @@ ActionChains(driver).click(shoppingCartButton).perform()
 
 time.sleep(3)
 
-# TODO: add fall2023 support
+# You can select the semester based on the row that it's on
 # Semesters
-spring2023 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
+row1 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_0"]/td')
+row2 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
+row3 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_2"]/td')
 
 # Click current semester
-semester = spring2023
+semester = row2
 ActionChains(driver).click(semester).perform()
 
 time.sleep(1)
