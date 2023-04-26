@@ -50,6 +50,11 @@ passwordFile = open('password.txt', 'r')
 password = passwordFile.read()
 passwordFile.close()
 
+# get totp token from file
+totpfile = open('totpsecret.txt', 'r')
+totp = totpfile.read()
+totpfile.close()
+
 # Login
 
 # Wait for login page
