@@ -9,6 +9,8 @@ from selenium.webdriver import ActionChains
 from sys import platform
 import time
 import pyautogui
+import hashlib
+import pyotp
 
 from selenium.webdriver.chrome.service import Service
 
