@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from sys import platform
 import time
+import datetime
 import pyautogui
 import hashlib
 import pyotp
@@ -146,6 +147,14 @@ enrollnum = 2
 # refresh the page
 driver.refresh()
 
+# Wait until 12AM
+# while it's not 12AM
+while datetime.datetime.now().hour != 0 and datetime.datetime.now().minute != 0:
+    # wait 1 second
+    time.sleep(0.5)
+    # refresh the page
+    print('Waiting for 12AM')
+
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
     checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
@@ -161,7 +170,6 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')
 # Run the javascript to click the yes button
 driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
-input('Continue?')
-time.sleep(1)
+input('Finished. Press enter to close the program.')
 
 driver.close
