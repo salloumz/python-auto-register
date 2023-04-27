@@ -139,7 +139,6 @@ enrollnum = 2
 # Method 1: click the enroll button to unglitch the page
 # enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 # ActionChains(driver).click(enrollButton).perform()
-# # TODO: Improve Reliability
 # WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
 # time.sleep(0.1)
 
