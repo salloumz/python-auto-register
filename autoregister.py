@@ -133,14 +133,27 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.P
 # Wait until the page is loaded
 # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')))
 
+# Go directly to the iframe page
+# driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?NavColl=true&ICAGTarget=start&ICAJAXTrf=true')
+
+# Wait for the iframe to become visible
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
+
+# Switch to the iframe
+driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
+
 # Radio buttons for each semester
-radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0.PSRADIOBUTTON')
-radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0.PSRADIOBUTTON')
-radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0.PSRADIOBUTTON')
+radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
+radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
+radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
 
 radiobtn = radio1
 
-radiobtn.click
+# Select the radio button by clicking on it with actionchains
+ActionChains(driver).click(radiobtn).perform()
+
+
+input('Press enter to continue')
 
 # Click continue
 continueButton = driver.find_element(By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')
