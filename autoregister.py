@@ -188,7 +188,7 @@ ActionChains(driver).click(enrollButton).perform()
 # if lionpath glitches, it will load the iframe from earlier, print out if this happens
 while not driver.find_elements(By.ID, '#ICYes'):
     if driver.find_elements(By.ID, 'main_target_win0'):
-        print('iframe loaded again, quitting')
+        print('iframe detected, quitting')
         driver.close
 
 # Wait for yes button to appear
