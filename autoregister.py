@@ -162,13 +162,15 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUD
 # WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
 
 # how many classes are you enrolling in?
+# TODO: we can auto detect this by counting the number of checkboxes
 enrollnum = 2
 
 # click the enroll button to unglitch the page
 enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
-# TODO: Wait for the loading screen to go away
-time.sleep(0.5)
+# TODO: Improve Reliability
+WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
+time.sleep(0.1)
 
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
