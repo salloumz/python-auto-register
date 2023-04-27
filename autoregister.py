@@ -165,12 +165,15 @@ WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT
 driver.switch_to.default_content()
 
 # Go to the shopping cart
-shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-ActionChains(driver).click(shoppingCartButton).perform()
-
+# Method 1: Click the shopping cart button
+# shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+# ActionChains(driver).click(shoppingCartButton).perform()
+# Method 2: Go directly to the shopping cart url
+driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true')
 
 # wait for the loading screen to go away
-WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
+# (only needed if we use method 1)
+# WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
 
 # how many classes are you enrolling in?
 enrollnum = 2
@@ -185,11 +188,20 @@ for i in range(enrollnum):
 enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
 
-# if lionpath glitches, it will load the iframe from earlier, print out if this happens
-while not driver.find_elements(By.ID, '#ICYes'):
-    if driver.find_elements(By.ID, 'main_target_win0'):
-        print('iframe detected, quitting')
-        driver.close
+# # if lionpath glitches, it will load the iframe from earlier, print out if this happens
+# while not driver.find_elements(By.ID, '#ICYes'):
+#     if driver.find_elements(By.ID, 'main_target_win0'):
+#         print('iframe detected, we need to go back to the shopping cart')
+#         shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+#         ActionChains(driver).click(shoppingCartButton).perform()
+#         # wait for the loading screen to go away
+#         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
+#         for i in range(enrollnum):
+#             checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
+#             ActionChains(driver).click(checkbox).perform()
+#         # Hit the enroll button
+#         enrollButton = driver.find_element(By.ID, 'DERIVED_REGFRM1_LINK_ADD_ENRL$291$')
+#         ActionChains(driver).click(enrollButton).perform()
 
 # Wait for yes button to appear
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
