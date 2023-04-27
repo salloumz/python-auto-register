@@ -128,31 +128,31 @@ while not enrollmentBtnFound:
 
 driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
 
-# this webdriverwait may be unstable
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
-time.sleep(4)
-shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-ActionChains(driver).click(shoppingCartButton).perform()
+# # this webdriverwait may be unstable
+# # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
+# time.sleep(4)
+# shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+# ActionChains(driver).click(shoppingCartButton).perform()
 
-time.sleep(3)
+# time.sleep(3)
 
-# You can select the semester based on the row that it's on
-# Semesters
-row1 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_0"]/td')
-row2 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
-row3 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_2"]/td')
+# # You can select the semester based on the row that it's on
+# # Semesters
+# row1 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_0"]/td')
+# row2 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
+# row3 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_2"]/td')
 
-# Click current semester
-semester = row2
-ActionChains(driver).click(semester).perform()
+# # Click current semester
+# semester = row2
+# ActionChains(driver).click(semester).perform()
 
-time.sleep(1)
+# time.sleep(1)
 
-# Trying to hit shopping cart button
-# driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
-# driver.sleep fix this pls
-# shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-ActionChains(driver).click(shoppingCartButton).perform()
+# # Trying to hit shopping cart button
+# # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
+# # driver.sleep fix this pls
+# # shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+# ActionChains(driver).click(shoppingCartButton).perform()
 
 input('Press enter to continue after going to enroll key')
 time.sleep(1)
