@@ -20,7 +20,7 @@ chromeoptions = webdriver.ChromeOptions()
 # TODO: Add support for other browsers
 # Brave Browser
 if platform == "linux" or platform == "linux2":
-    # Linux
+    # Linux, chromedriver, Brave
     print('Linux')
     chromedriver = "/usr/bin/chromedriver"
     chromeoptions.binary_location = '/usr/bin/brave'
@@ -29,7 +29,7 @@ if platform == "linux" or platform == "linux2":
     # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
     # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
 elif platform == "darwin":
-    # MacOS
+    # MacOS, chromedriver, Brave
     print('macOS')
     chromedriver = "/opt/homebrew/bin/chromedriver"
     chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
