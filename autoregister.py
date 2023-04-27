@@ -148,11 +148,21 @@ driver.refresh()
 
 # Wait until 12AM
 # while it's not 12AM
-while datetime.datetime.now().hour != 0 and datetime.datetime.now().minute != 0:
+while datetime.datetime.now().hour != 0:
     # wait 1 second
     time.sleep(0.5)
     # refresh the page
     print('Waiting for 12AM')
+
+# refresh the page to reveal the enroll button
+driver.refresh()
+
+# TODO: attempt to check if the enroll button is visible, otherwise refresh the page
+while not driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL').is_displayed():
+    # refresh the page
+    print('Waiting for enroll button to appear')
+    driver.refresh()
+
 
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
