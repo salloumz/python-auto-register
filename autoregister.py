@@ -165,8 +165,4 @@ driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#
 input('Continue?')
 time.sleep(1)
 
-# Hit the enroll button
-
-time.sleep(1)
-
 driver.close
