@@ -128,11 +128,25 @@ while not enrollmentBtnFound:
 
 driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
 
-# # this webdriverwait may be unstable
-# # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')))
-# time.sleep(4)
-# shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-# ActionChains(driver).click(shoppingCartButton).perform()
+# Wait until the page is loaded
+# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')))
+
+# Radio buttons for each semester
+radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0.PSRADIOBUTTON')
+radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0.PSRADIOBUTTON')
+radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0.PSRADIOBUTTON')
+
+radiobtn = radio1
+
+radiobtn.click
+
+# Click continue
+continueButton = driver.find_element(By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')
+
+# Go to the shopping cart
+shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
+ActionChains(driver).click(shoppingCartButton).perform()
+
 
 # time.sleep(3)
 
