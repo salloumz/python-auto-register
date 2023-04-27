@@ -179,14 +179,17 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUD
 # how many classes are you enrolling in?
 enrollnum = 2
 
+# click the enroll button to unglitch the page
+enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
+ActionChains(driver).click(enrollButton).perform()
+
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
     checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
     ActionChains(driver).click(checkbox).perform()
 
 # Hit the enroll button
-# enrollButton = driver.find_element(By.ID, 'DERIVED_REGFRM1_LINK_ADD_ENRL$291$')
-enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
+# enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
 
 # # if lionpath glitches, it will load the iframe from earlier, print out if this happens
@@ -216,12 +219,13 @@ time.sleep(0.5)
 # buttonToClick = yesButton
 # ActionChains(driver).click(buttonToClick).perform()
 # Confirmation Method 2: Tab to the yes button and hit enter
-yesButton = driver.find_element(By.ID, '#ICYes')
-noButton = driver.find_element(By.ID, '#ICNo')
-buttonToClick = yesButton
+# yesButton = driver.find_element(By.ID, '#ICYes')
+# noButton = driver.find_element(By.ID, '#ICNo')
+# buttonToClick = yesButton
 # ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue004').perform()
-ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue007').perform()
-
+# ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue007').perform()
+# Confirmation Method 3: Run the javascript to click the yes button
+# driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
 # time.sleep(3)
 
