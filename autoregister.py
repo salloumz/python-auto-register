@@ -37,9 +37,9 @@ elif platform == "darwin":
     # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
 else:
     print('Unsupported operating system')
-
-
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+
+
 lionpath = "https://lionpath.psu.edu/"
 enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
 driver.get(enrollmentPage)
