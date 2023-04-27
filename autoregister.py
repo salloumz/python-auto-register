@@ -150,7 +150,7 @@ driver.refresh()
 # while it's not 12AM
 while datetime.datetime.now().hour != 0:
     # wait 1 second
-    time.sleep(0.5)
+    time.sleep(0.1)
     # refresh the page
     print('Waiting for 12AM')
 
