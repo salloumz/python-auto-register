@@ -37,6 +37,7 @@ else:
 
 
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+# TODO: Go directly to the enrollment page instead of going through the lionpath homepage to improve performance
 lionpath = "https://lionpath.psu.edu/"
 driver.get(lionpath)
 
@@ -206,14 +207,20 @@ ActionChains(driver).click(enrollButton).perform()
 # Wait for yes button to appear
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
 
+time.sleep(0.5)
+
 # "Are you sure you want to enroll?"
-# Click "Yes"
+# Confirmation Method 1: Click the yes button
+# yesButton = driver.find_element(By.ID, '#ICYes')
+# noButton = driver.find_element(By.ID, '#ICNo')
+# buttonToClick = yesButton
+# ActionChains(driver).click(buttonToClick).perform()
+# Confirmation Method 2: Tab to the yes button and hit enter
 yesButton = driver.find_element(By.ID, '#ICYes')
 noButton = driver.find_element(By.ID, '#ICNo')
-
 buttonToClick = yesButton
-
-ActionChains(driver).click(buttonToClick).perform()
+# ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue004').perform()
+ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue007').perform()
 
 
 # time.sleep(3)
