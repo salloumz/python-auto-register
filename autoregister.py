@@ -39,7 +39,8 @@ else:
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
 # TODO: Go directly to the enrollment page instead of going through the lionpath homepage to improve performance
 lionpath = "https://lionpath.psu.edu/"
-driver.get(lionpath)
+enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
+driver.get(enrollmentPage)
 
 # grab username from file
 usernameFile = open('username.txt', 'r')
@@ -96,21 +97,6 @@ driver.find_element(By.NAME, 'otc').send_keys(totpcode)
 driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
 
 
-
-enrollmentBtnFound = False
-while not enrollmentBtnFound:
-    # If duo detects browser is out of date, click the skip button
-    # this code doesn't fully work yet, since the skip button is not always there
-    # if driver.find_elements(By.NAME, 'Skip'):
-    if driver.find_elements(By.CSS_SELECTOR, 'body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable > span'):
-        skipButton = driver.find_element(By.CSS_SELECTOR, 'body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable > span')
-        ActionChains(driver).click(skipButton).perform()
-        # driver.execute_script(document.querySelector("body > div > div > div.base-main > div > div > div.navigation > div.nav-button.next.clickable"))
-    # else find the enrollment button
-    elif driver.find_elements(By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1'):
-        enrollmentBtnFound = True
-
-
 # Wait until push accepted lionpath is loaded, we are waiting for the enrollment button
 # WebDriverWait(driver, 240).until(EC.presence_of_element_located((By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1')))
 
@@ -130,7 +116,7 @@ while not enrollmentBtnFound:
 
 # go to the enrollment page
 
-driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
+# driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
 
 # Wait until the page is loaded
 # WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')))
