@@ -182,6 +182,8 @@ enrollnum = 2
 # click the enroll button to unglitch the page
 enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
+# TODO: Wait for the loading screen to go away
+time.sleep(0.5)
 
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
@@ -189,7 +191,7 @@ for i in range(enrollnum):
     ActionChains(driver).click(checkbox).perform()
 
 # Hit the enroll button
-# enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
+enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
 
 # # if lionpath glitches, it will load the iframe from earlier, print out if this happens
@@ -210,7 +212,7 @@ ActionChains(driver).click(enrollButton).perform()
 # Wait for yes button to appear
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
 
-time.sleep(0.5)
+# time.sleep(0.5)
 
 # "Are you sure you want to enroll?"
 # Confirmation Method 1: Click the yes button
@@ -225,7 +227,7 @@ time.sleep(0.5)
 # ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue004').perform()
 # ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue007').perform()
 # Confirmation Method 3: Run the javascript to click the yes button
-# driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
+driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
 # time.sleep(3)
 
