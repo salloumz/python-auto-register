@@ -45,11 +45,13 @@ usernameFile = open('username.txt', 'r')
 username = usernameFile.read()
 usernameFile.close()
 
+# TODO: Fix the next button not being clicked
 # get password from file lmao
 passwordFile = open('password.txt', 'r')
 password = passwordFile.read()
 passwordFile.close()
 
+# TODO: Fix "You didn't enter an expected verification code. Please try again."
 # get totp token from file
 totpfile = open('totpsecret.txt', 'r')
 totpsecret = totpfile.read()
