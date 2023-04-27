@@ -46,6 +46,7 @@ username = usernameFile.read()
 usernameFile.close()
 
 # TODO: Fix the next button not being clicked
+# TODO: We can do this by using a try catch and hitting enter again if it fails
 # get password from file lmao
 passwordFile = open('password.txt', 'r')
 password = passwordFile.read()
@@ -147,20 +148,60 @@ radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
 radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
 radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
 
-radiobtn = radio1
+radiobtn = radio3
 
 # Select the radio button by clicking on it with actionchains
 ActionChains(driver).click(radiobtn).perform()
 
 
-input('Press enter to continue')
-
 # Click continue
 continueButton = driver.find_element(By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')
+continueButton.click()
+
+# Wait for the loading screen to go away
+WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
+
+# get out of the iframe
+driver.switch_to.default_content()
 
 # Go to the shopping cart
 shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
 ActionChains(driver).click(shoppingCartButton).perform()
+
+
+# wait for the loading screen to go away
+WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
+
+# how many classes are you enrolling in?
+enrollnum = 2
+
+# checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
+for i in range(enrollnum):
+    checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
+    ActionChains(driver).click(checkbox).perform()
+
+# Hit the enroll button
+# enrollButton = driver.find_element(By.ID, 'DERIVED_REGFRM1_LINK_ADD_ENRL$291$')
+enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
+ActionChains(driver).click(enrollButton).perform()
+
+# if lionpath glitches, it will load the iframe from earlier, print out if this happens
+while not driver.find_elements(By.ID, '#ICYes'):
+    if driver.find_elements(By.ID, 'main_target_win0'):
+        print('iframe loaded again, quitting')
+        driver.close
+
+# Wait for yes button to appear
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
+
+# "Are you sure you want to enroll?"
+# Click "Yes"
+yesButton = driver.find_element(By.ID, '#ICYes')
+noButton = driver.find_element(By.ID, '#ICNo')
+
+buttonToClick = yesButton
+
+ActionChains(driver).click(buttonToClick).perform()
 
 
 # time.sleep(3)
@@ -183,7 +224,7 @@ ActionChains(driver).click(shoppingCartButton).perform()
 # # shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
 # ActionChains(driver).click(shoppingCartButton).perform()
 
-input('Press enter to continue after going to enroll key')
+input('Enroll?')
 time.sleep(1)
 
 # Hit the enroll button
