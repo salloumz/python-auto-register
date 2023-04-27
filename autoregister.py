@@ -51,7 +51,7 @@ usernameFile.close()
 
 # TODO: Fix the next button not being clicked
 # TODO: We can do this by using a try catch and hitting enter again if it fails
-# get password from file lmao
+# get password from file
 passwordFile = open('password.txt', 'r')
 password = passwordFile.read()
 passwordFile.close()
@@ -70,9 +70,6 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'loginf
 # Type username
 driver.find_element(By.NAME, 'loginfmt').send_keys(username)
 
-# Wait
-# time.sleep(1)
-
 # Wait for password page
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'passwd')))
 
@@ -83,10 +80,9 @@ time.sleep(1)
 # Send enter key
 driver.find_element(By.NAME, 'passwd').send_keys(u'\ue007')
 
-
+# Wait for totp page
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'otc')))
 
-# Generate totp code
 # Create a TOTP object with the given secret
 totp = pyotp.TOTP(totpsecret, digits=6, digest=hashlib.sha1)
 
@@ -97,34 +93,6 @@ totpcode = totp.now()
 driver.find_element(By.NAME, 'otc').send_keys(totpcode)
 # Send enter key
 driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
-
-
-# Wait until push accepted lionpath is loaded, we are waiting for the enrollment button
-# WebDriverWait(driver, 240).until(EC.presence_of_element_located((By.ID, 'PE_UI020_BTNS_PE_GRID_BUTTON$1')))
-
-
-# input('Press enter to continue after logging in')
-
-# driver.find_element(By.ID, "win0divPE_UI020_BTNS_PE_GRID_BUTTON$1")
-# enrollment_button = driver.find_element(By.ID, "PE_UI020_BTNS_PE_GRID_BUTTON$span$1")
-# enrollment_button = driver.find_element(By.NAME, "Enrollment")
-# print(enrollment_button)
-# enrollment_button.click
-# enrollment_button.click
-
-# hit the enrollment button
-
-# driver.execute_script("submitAction_win0(document.win0,'PE_UI020_BTNS_PE_GRID_BUTTON$1')")
-
-# go to the enrollment page
-
-# driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y')
-
-# Wait until the page is loaded
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')))
-
-# Go directly to the iframe page
-# driver.get('https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSR_SSENRL_CART.GBL?NavColl=true&ICAGTarget=start&ICAJAXTrf=true')
 
 # Wait for the iframe to become visible
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
@@ -188,62 +156,13 @@ for i in range(enrollnum):
 enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 ActionChains(driver).click(enrollButton).perform()
 
-# # if lionpath glitches, it will load the iframe from earlier, print out if this happens
-# while not driver.find_elements(By.ID, '#ICYes'):
-#     if driver.find_elements(By.ID, 'main_target_win0'):
-#         print('iframe detected, we need to go back to the shopping cart')
-#         shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-#         ActionChains(driver).click(shoppingCartButton).perform()
-#         # wait for the loading screen to go away
-#         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
-#         for i in range(enrollnum):
-#             checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
-#             ActionChains(driver).click(checkbox).perform()
-#         # Hit the enroll button
-#         enrollButton = driver.find_element(By.ID, 'DERIVED_REGFRM1_LINK_ADD_ENRL$291$')
-#         ActionChains(driver).click(enrollButton).perform()
-
 # Wait for yes button to appear
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
 
-# time.sleep(0.5)
-
-# "Are you sure you want to enroll?"
-# Confirmation Method 1: Click the yes button
-# yesButton = driver.find_element(By.ID, '#ICYes')
-# noButton = driver.find_element(By.ID, '#ICNo')
-# buttonToClick = yesButton
-# ActionChains(driver).click(buttonToClick).perform()
-# Confirmation Method 2: Tab to the yes button and hit enter
-# yesButton = driver.find_element(By.ID, '#ICYes')
-# noButton = driver.find_element(By.ID, '#ICNo')
-# buttonToClick = yesButton
-# ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue004').perform()
-# ActionChains(driver).send_keys_to_element(buttonToClick, u'\ue007').perform()
-# Confirmation Method 3: Run the javascript to click the yes button
+# Run the javascript to click the yes button
 driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
-# time.sleep(3)
-
-# # You can select the semester based on the row that it's on
-# # Semesters
-# row1 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_0"]/td')
-# row2 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_1"]/td')
-# row3 = driver.find_element(By.XPATH, '//*[@id="GRID_TERM_SRC5$0_row_2"]/td')
-
-# # Click current semester
-# semester = row2
-# ActionChains(driver).click(semester).perform()
-
-# time.sleep(1)
-
-# # Trying to hit shopping cart button
-# # driver.execute_script("cancelBubble(event);if (!top.ptgpPage.openCustomStepButton('PE_S201901181129161770441332')) top.ptgpPage.openUrlWithWarning(this.getAttribute('href'), 'top.ptgpPage.selectStep(\'PE_S201901181129161770441332\');', true);return false;)")
-# # driver.sleep fix this pls
-# # shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win2divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-# ActionChains(driver).click(shoppingCartButton).perform()
-
-input('Enroll?')
+input('Continue?')
 time.sleep(1)
 
 # Hit the enroll button
