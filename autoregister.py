@@ -18,6 +18,7 @@ chromeoptions = webdriver.ChromeOptions()
 
 # TODO: Add support for Windows
 # TODO: Add support for other browsers
+# Brave Browser
 if platform == "linux" or platform == "linux2":
     # Linux
     print('Linux')
@@ -25,12 +26,14 @@ if platform == "linux" or platform == "linux2":
     chromeoptions.binary_location = '/usr/bin/brave'
     chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
     chromeoptions.add_argument("--enable-gpu-rasterization")
+    # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
     # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
 elif platform == "darwin":
     # MacOS
     print('macOS')
     chromedriver = "/opt/homebrew/bin/chromedriver"
     chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+    # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
     # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
 else:
     print('Unsupported operating system')
