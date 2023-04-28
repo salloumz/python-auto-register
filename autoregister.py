@@ -12,6 +12,20 @@ import pyautogui
 import hashlib
 import pyotp
 
+# Config Options
+# How many classes are you enrolling in?
+# TODO: we can auto detect this by counting the number of checkboxes
+enrollnum = 2
+# Should we wait until 12AM to enroll?
+waitUntil12AM = True
+# Experimental // Not fully implemented
+# Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
+useTOTP = True
+# Should we send a notification in Discord with results/if a class fails to enroll?
+sendDiscordNotification = False
+# Should we send an email with results/if a class fails to enroll?
+sendEmailNotification = False
+
 from selenium.webdriver.chrome.service import Service
 
 chromeoptions = webdriver.ChromeOptions()
@@ -38,6 +52,7 @@ elif platform == "darwin":
 else:
     print('Unsupported operating system')
 driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+
 
 
 lionpath = "https://lionpath.psu.edu/"
@@ -132,10 +147,6 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUD
 # (only needed if we use method 1)
 # WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
 
-# how many classes are you enrolling in?
-# TODO: we can auto detect this by counting the number of checkboxes
-enrollnum = 2
-
 # Method 1: click the enroll button to unglitch the page
 # enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
 # ActionChains(driver).click(enrollButton).perform()
@@ -147,8 +158,7 @@ enrollnum = 2
 driver.refresh()
 
 # Wait until 12AM
-# while it's not 12AM
-while datetime.datetime.now().hour != 0:
+while datetime.datetime.now().hour != 0 and waitUntil12AM:
     # wait 1 second
     time.sleep(0.1)
     # refresh the page
