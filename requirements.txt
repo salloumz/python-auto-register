@@ -1,4 +1,1 @@
-time
-datetime
-hashlib
-pyotp
+pyotp>=2.8.0
