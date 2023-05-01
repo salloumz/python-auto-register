@@ -16,7 +16,7 @@ import pyotp
 # TODO: we can auto detect this by counting the number of checkboxes
 enrollnum = 2
 # Should we wait until 12AM to enroll?
-waitUntil12AM = True
+waitUntil12AM = False
 # Experimental // Not fully implemented
 # Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
 useTOTP = True
@@ -187,6 +187,13 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')
 
 # Run the javascript to click the yes button
 driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
+
+# Check if any classes failed to enroll
+# success = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
+# fail = win2divDERIVED_REGFRM1_DESCRLONG$x
+# TODO: implement
+
+
 
 input('Finished. Press enter to close the program.')
 
