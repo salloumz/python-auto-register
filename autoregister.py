@@ -8,7 +8,6 @@ from selenium.webdriver import ActionChains
 from sys import platform
 import time
 import datetime
-import pyautogui
 import hashlib
 import pyotp
 
