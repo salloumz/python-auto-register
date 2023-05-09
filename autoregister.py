@@ -117,9 +117,9 @@ driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 # Radio buttons for each semester
 radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
 radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
-radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
+# radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
 
-radiobtn = radio3
+radiobtn = radio2
 
 # Select the radio button by clicking on it with actionchains
 ActionChains(driver).click(radiobtn).perform()
