@@ -10,3 +10,11 @@ def generate_2fa_code(secret):
 
     # Return the TOTP code as a string
     return str(code)
+
+def main():
+    # get the secret from the totpsecret.txt file
+    totpsecret = open("totpsecret.txt", "r").read()
+    code = generate_2fa_code(totpsecret)
+    print(code)
+
+main()
