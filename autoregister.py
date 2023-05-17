@@ -16,8 +16,7 @@ from config import *
 
 chromeoptions = webdriver.ChromeOptions()
 
-# TODO: Add support for Windows
-# TODO: Add support for other browsers
+# TODO: Add support for Chrome
 # Brave Browser
 # mainly for development purposes
 if useBrave:
@@ -60,15 +59,22 @@ else:
         chromeoptions.add_argument("--enable-gpu-rasterization")
         driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
     elif platform == "darwin":
-        # MacOS, safaridriver, Safari
-        # the best part about this is that it's built in to macOS
+        # MacOS, chromedriver, chromium
+        # Dropped support for Safari, there are too many issues with it
         print('macOS')
-        try:
-            driver = webdriver.Safari()
-        except:
-            # if remote automation is not enabled, enable it
-            print('Remote automation is not enabled. Please enable it in Safari > Preferences > Advanced > Show Develop menu in menu bar, then Develop > Allow Remote Automation')
-            print('Alternatively, you can run /"safaridriver --enable/" in your terminal.')
+        # assuming chromium is in /Applications/Chromium.app/Contents/MacOS/Chromium
+        # check for it
+        if not os.path.exists('/Applications/Chromium.app/Contents/MacOS/Chromium'):
+            print('Chromium is not installed. Please install it from https://download-chromium.appspot.com/')
+            print('or install it with Homebrew: brew install --cask chromium')
+            exit()
+        # check for chromedriver
+        if not os.path.exists('/opt/homebrew/bin/chromedriver'):
+            print('Chromedriver is not installed. Please install it with Homebrew: brew install --cask chromedriver')
+            exit()
+        chromedriver = "/opt/homebrew/bin/chromedriver"
+        chromeoptions.binary_location = '/Applications/Chromium.app/Contents/MacOS/Chromium'
+        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
     elif platform == "win32":
         # Windows, edgedriver, Edge
         # Experimental, not fully implemented 
@@ -148,8 +154,7 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_tar
 driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 
 # TODO: automatically detect each button
-# Radio buttons for each semester
-# TODO: Safari Bug: iframe loads too early, causing the radio buttons to not be found
+# Radio buttons for each semesterd
 radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
 radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
 # radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
