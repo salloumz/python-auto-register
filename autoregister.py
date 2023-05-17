@@ -191,7 +191,7 @@ driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#
 
 # Check if any classes failed to enroll
 # success = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
-# fail = win2divDERIVED_REGFRM1_DESCRLONG$x
+# fail = win2divDERIVED_REGFRM1_DESCRLONG$x where x is a number
 
 # Wait for the loading screen to go away
 WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
