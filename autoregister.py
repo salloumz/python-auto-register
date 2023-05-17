@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from sys import platform
+import os
 import time
 import datetime
 import hashlib
@@ -18,26 +19,62 @@ chromeoptions = webdriver.ChromeOptions()
 # TODO: Add support for Windows
 # TODO: Add support for other browsers
 # Brave Browser
-if platform == "linux" or platform == "linux2":
-    # Linux, chromedriver, Brave
-    print('Linux')
-    chromedriver = "/usr/bin/chromedriver"
-    chromeoptions.binary_location = '/usr/bin/brave'
-    chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
-    chromeoptions.add_argument("--enable-gpu-rasterization")
-    # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
-    # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
-elif platform == "darwin":
-    # MacOS, chromedriver, Brave
-    print('macOS')
-    chromedriver = "/opt/homebrew/bin/chromedriver"
-    chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-    # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
-    # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
+# mainly for development purposes
+if useBrave:
+    if platform == "linux" or platform == "linux2":
+        # Linux, chromedriver, Brave
+        print('Linux, Brave')
+        chromedriver = "/usr/bin/chromedriver"
+        chromeoptions.binary_location = '/usr/bin/brave'
+        chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
+        chromeoptions.add_argument("--enable-gpu-rasterization")
+        # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
+        # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
+        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+    elif platform == "darwin":
+        # MacOS, chromedriver, Brave
+        print('macOS, Brave')
+        chromedriver = "/opt/homebrew/bin/chromedriver"
+        chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+        # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
+        # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
+        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+    else:
+        print('Unsupported operating system')
+# for production
 else:
-    print('Unsupported operating system')
-driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
-
+    if platform == "linux" or platform == "linux2":
+        # Linux, chromedriver, chromium
+        print('Linux')
+        # check if chromium is installed
+        if not os.path.exists('/usr/bin/chromium'):
+            print('Chromium is not installed. Please install it with your package manager.')
+            exit()
+        # check for chromedriver
+        if not os.path.exists('/usr/bin/chromedriver'):
+            print('Chromedriver is not installed. Please install it with your package manager.')
+            exit()
+        chromedriver = "/usr/bin/chromedriver"
+        chromeoptions.binary_location = '/usr/bin/chromium'
+        chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
+        chromeoptions.add_argument("--enable-gpu-rasterization")
+        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+    elif platform == "darwin":
+        # MacOS, safaridriver, Safari
+        # the best part about this is that it's built in to macOS
+        print('macOS')
+        safaridriver = "/usr/bin/safaridriver"
+        driver = webdriver.Safari(service=Service(safaridriver))
+    elif platform == "win32":
+        # Windows, edgedriver, Edge
+        # Experimental, not fully implemented 
+        print('Windows')
+        # check for edgedriver
+        if not os.path.exists('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe'):
+            print('Edgedriver is not installed. Please install it from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/')
+            exit()
+        edgedriver = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe"
+        driver = webdriver.Edge(service=Service(edgedriver))
 
 
 lionpath = "https://lionpath.psu.edu/"
