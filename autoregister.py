@@ -200,10 +200,12 @@ WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT
 # Experimental: check if the fail ID is displayed
 for i in range(enrollnum):
     fail = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
-    failText = fail.text
+    className = fail.text
+    # we also need to get the ps-htmlarea div contained within id win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$1
+    failMessage = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
     if fail.is_displayed():
         # print the class that failed to enroll by checking the text of the element
-        print('Class "' + failText + '" failed to enroll')
+        print('Class "' + className + '" failed to enroll')
         if sendDiscordNotification:
             import requests
             # timestamp
@@ -214,9 +216,8 @@ for i in range(enrollnum):
             }
             data["embeds"] = [
                 {
-                    "title" : ":warning: **" + failText + "** failed to enroll.",
-                    # description should be a timestamp
-                    "description" : "Class **" + failText + "** failed to enroll at " + str(timestamp),
+                    "title" : ":x: **" + className + "**",
+                    "description" : "**" + failMessage + "**\n" + str(timestamp),
                     "color" : 0xff0000
                 }
             ]
