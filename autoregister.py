@@ -202,7 +202,9 @@ for i in range(enrollnum):
     fail = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
     className = fail.text
     # we also need to get the ps-htmlarea div contained within id win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$1
-    failMessage = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
+    failHTML = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
+    # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
+    failMessage = failHTML.splitlines()[2:-2][0]
     if fail.is_displayed():
         # print the class that failed to enroll by checking the text of the element
         print('Class "' + className + '" failed to enroll')
@@ -217,7 +219,7 @@ for i in range(enrollnum):
             data["embeds"] = [
                 {
                     "title" : ":x: **" + className + "**",
-                    "description" : "**" + failMessage + "**\n" + str(timestamp),
+                    "description" : "**" + failMessage + "**\n\n" + str(timestamp),
                     "color" : 0xff0000
                 }
             ]
