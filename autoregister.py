@@ -102,12 +102,19 @@ WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_tar
 # Switch to the iframe
 driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 
+# TODO: automatically detect each button
 # Radio buttons for each semester
 radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
 radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
 # radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
 
-radiobtn = radio2
+# pick the radio button using the enrollnum
+if radnum == 1:
+    radiobtn = radio1
+elif radnum == 2:
+    radiobtn = radio2
+elif radnum == 3:
+    radiobtn = radio3
 
 # Select the radio button by clicking on it with actionchains
 ActionChains(driver).click(radiobtn).perform()

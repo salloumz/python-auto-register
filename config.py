@@ -1,4 +1,6 @@
 # Config Options
+# Which semester are you enrolling in? (Which radio button should be selected?)
+radnum = 2
 # How many classes are you enrolling in?
 # TODO: we can auto detect this by counting the number of checkboxes
 enrollnum = 2
