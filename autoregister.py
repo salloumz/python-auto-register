@@ -144,6 +144,11 @@ driver.refresh()
 
 # Wait until 12AM
 while datetime.datetime.now().hour != 0 and waitUntil12AM:
+    # check if the "Your session is about to expire" popup is visible
+    # id="#ICOK"
+    # if it is, run javascript:pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();
+    if driver.find_element(By.ID, '#ICOK').is_displayed():
+        driver.execute_script('pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();')
     # wait 1 second
     time.sleep(0.1)
     # refresh the page
