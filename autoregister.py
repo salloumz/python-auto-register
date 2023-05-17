@@ -200,15 +200,17 @@ WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT
 
 # Experimental: check if the fail ID is displayed
 for i in range(enrollnum):
-    fail = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
-    className = fail.text
-    # we also need to get the ps-htmlarea div contained within id win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$1
-    failHTML = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
-    # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
-    failMessage = failHTML.splitlines()[2:-2][0]
-    if fail.is_displayed():
+    classObj = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
+    className = classObj.text
+    # check to see if the class was fail or success
+    # if the fail element exists
+    if driver.find_elements(By.ID, 'win2divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
+        # we also need to get the ps-htmlarea div contained within id win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$1
+        divHTML = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
+        # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
+        failMessage = divHTML.splitlines()[2:-2][0]
         # print the class that failed to enroll by checking the text of the element
-        print('Class "' + className + '" failed to enroll')
+        print("Class \"" + className + "\" failed to enroll")
         if sendDiscordNotification:
             import requests
             # timestamp
@@ -225,6 +227,48 @@ for i in range(enrollnum):
                 }
             ]
             requests.post(discordWebhookURL, json = data)
+    # else if the success element exists
+    elif driver.find_elements(By.ID, 'win0divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
+        divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
+        # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
+        successMessage = divHTML.splitlines()[2:-2][0]
+        print("Class \"" + className + "\" successfully enrolled")
+        if sendDiscordNotification:
+            import requests
+            # timestamp
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+            # send a discord notification
+            data = {
+                "username" : "LionPath Sniper",
+            }
+            data["embeds"] = [
+                {
+                    "title" : ":white_check_mark: **" + className + "**",
+                    "description" : "**" + successMessage + "**\n\n" + str(timestamp),
+                    "color" : 0x00ff00
+                }
+            ]
+            requests.post(discordWebhookURL, json = data)
+    else:
+        print("Error checking if class \"" + className + "\" failed to enroll")
+        if sendDiscordNotification:
+            import requests
+            # timestamp
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+            # send a discord notification
+            data = {
+                "username" : "LionPath Sniper",
+            }
+            data["embeds"] = [
+                {
+                    "title" : ":warning: **" + className + "**",
+                    "description" : "**Error checking if class \"" + className + "\" failed to enroll**\n\n" + str(timestamp),
+                    # yellow
+                    "color" : 0xffff00
+                }
+            ]
+            requests.post(discordWebhookURL, json = data)
+
 
 
 
