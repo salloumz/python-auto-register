@@ -9,5 +9,7 @@ waitUntil12AM = False
 useTOTP = True
 # Should we send a notification in Discord with results/if a class fails to enroll?
 sendDiscordNotification = False
+# Discord Webhook URL
+discordWebhookURL = ""
 # Should we send an email with results/if a class fails to enroll?
 sendEmailNotification = False
