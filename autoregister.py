@@ -195,7 +195,6 @@ driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#
 
 # Wait for the loading screen to go away
 WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
-WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
 
 # Experimental: check if the fail ID is displayed
 for i in range(enrollnum):
