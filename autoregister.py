@@ -63,8 +63,12 @@ else:
         # MacOS, safaridriver, Safari
         # the best part about this is that it's built in to macOS
         print('macOS')
-        safaridriver = "/usr/bin/safaridriver"
-        driver = webdriver.Safari(service=Service(safaridriver))
+        try:
+            driver = webdriver.Safari()
+        except:
+            # if remote automation is not enabled, enable it
+            print('Remote automation is not enabled. Please enable it in Safari > Preferences > Advanced > Show Develop menu in menu bar, then Develop > Allow Remote Automation')
+            print('Alternatively, you can run /"safaridriver --enable/" in your terminal.')
     elif platform == "win32":
         # Windows, edgedriver, Edge
         # Experimental, not fully implemented 
@@ -76,7 +80,8 @@ else:
         edgedriver = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe"
         driver = webdriver.Edge(service=Service(edgedriver))
 
-
+# we need to maximize the window so that all elements are visible
+driver.maximize_window()
 lionpath = "https://lionpath.psu.edu/"
 enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
 driver.get(enrollmentPage)
@@ -144,6 +149,7 @@ driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 
 # TODO: automatically detect each button
 # Radio buttons for each semester
+# TODO: Safari Bug: iframe loads too early, causing the radio buttons to not be found
 radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
 radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
 # radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
