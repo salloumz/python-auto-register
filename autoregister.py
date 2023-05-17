@@ -32,6 +32,7 @@ if useBrave:
         driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
     elif platform == "darwin":
         # MacOS, chromedriver, Brave
+        # Dropped support for Safari, there are too many issues with it, and it's slow
         print('macOS, Brave')
         chromedriver = "/opt/homebrew/bin/chromedriver"
         chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
