@@ -15,3 +15,5 @@ sendDiscordNotification = False
 discordWebhookURL = ""
 # Should we send an email with results/if a class fails to enroll?
 sendEmailNotification = False
+# Should we use the Brave Browser instead of the built in one?
+useBrave = False
