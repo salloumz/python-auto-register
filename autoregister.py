@@ -207,7 +207,7 @@ for i in range(enrollnum):
                     "title" : ":warning: Some classes failed to enroll.",
                     # description should be a timestamp
                     "description" : "Class " + str(i) + " failed to enroll at " + str(timestamp),
-                    "color" : 0x00ff00
+                    "color" : 0xff0000
                 }
             ]
             requests.post(discordWebhookURL, json = data)
