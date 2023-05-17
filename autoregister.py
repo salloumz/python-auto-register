@@ -57,10 +57,11 @@ password = passwordFile.read()
 passwordFile.close()
 
 # TODO: Fix "You didn't enter an expected verification code. Please try again."
-# get totp token from file
-totpfile = open('totpsecret.txt', 'r')
-totpsecret = totpfile.read()
-totpfile.close()
+if useTOTP:
+    # get totp token from file
+    totpfile = open('totpsecret.txt', 'r')
+    totpsecret = totpfile.read()
+    totpfile.close()
 
 # Login
 
@@ -80,19 +81,20 @@ time.sleep(1)
 # Send enter key
 driver.find_element(By.NAME, 'passwd').send_keys(u'\ue007')
 
-# Wait for totp page
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'otc')))
+if useTOTP:
+    # Wait for totp page
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, 'otc')))
 
-# Create a TOTP object with the given secret
-totp = pyotp.TOTP(totpsecret, digits=6, digest=hashlib.sha1)
+    # Create a TOTP object with the given secret
+    totp = pyotp.TOTP(totpsecret, digits=6, digest=hashlib.sha1)
 
-# Get the current TOTP code
-totpcode = totp.now()
+    # Get the current TOTP code
+    totpcode = totp.now()
 
-# Type totp code
-driver.find_element(By.NAME, 'otc').send_keys(totpcode)
-# Send enter key
-driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
+    # Type totp code
+    driver.find_element(By.NAME, 'otc').send_keys(totpcode)
+    # Send enter key
+    driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
 
 # Wait for the iframe to become visible
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
