@@ -60,21 +60,23 @@ else:
         chromeoptions.add_argument("--enable-gpu-rasterization")
         driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
     elif platform == "darwin":
-        # MacOS, chromedriver, chromium
+        # MacOS, chromedriver, chromium/chrome
         # Dropped support for Safari, there are too many issues with it
         print('macOS')
-        # assuming chromium is in /Applications/Chromium.app/Contents/MacOS/Chromium
-        # check for it
-        if not os.path.exists('/Applications/Chromium.app/Contents/MacOS/Chromium'):
-            print('Chromium is not installed. Please install it from https://download-chromium.appspot.com/')
-            print('or install it with Homebrew: brew install --cask chromium')
+        # check for chromium
+        if os.path.exists('/Applications/Chromium.app/Contents/MacOS/Chromium'):
+            chromeoptions.binary_location = '/Applications/Chromium.app/Contents/MacOS/Chromium'
+        # check for chrome
+        elif os.path.exists('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'):
+            chromeoptions.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+        else:
+            print('Chromium or Google Chrome is not installed. Please install one of them to continue. https://www.google.com/chrome/')
             exit()
         # check for chromedriver
         if not os.path.exists('/opt/homebrew/bin/chromedriver'):
             print('Chromedriver is not installed. Please install it with Homebrew: brew install --cask chromedriver')
             exit()
-        chromedriver = "/opt/homebrew/bin/chromedriver"
-        chromeoptions.binary_location = '/Applications/Chromium.app/Contents/MacOS/Chromium'
+            chromedriver = "/opt/homebrew/bin/chromedriver"
         driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
     elif platform == "win32":
         # Windows, edgedriver, Edge
