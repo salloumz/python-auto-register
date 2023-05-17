@@ -249,26 +249,6 @@ for i in range(enrollnum):
                 }
             ]
             requests.post(discordWebhookURL, json = data)
-    else:
-        print("Error checking if class \"" + className + "\" failed to enroll")
-        if sendDiscordNotification:
-            import requests
-            # timestamp
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
-            # send a discord notification
-            data = {
-                "username" : "LionPath Sniper",
-            }
-            data["embeds"] = [
-                {
-                    "title" : ":warning: **" + className + "**",
-                    "description" : "**Error checking if class \"" + className + "\" failed to enroll**\n\n" + str(timestamp),
-                    # yellow
-                    "color" : 0xffff00
-                }
-            ]
-            requests.post(discordWebhookURL, json = data)
-
 
 
 
