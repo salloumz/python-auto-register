@@ -199,8 +199,10 @@ WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT
 
 # Experimental: check if the fail ID is displayed
 for i in range(enrollnum):
-    fail = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_DESCRLONG$' + str(i))
+    fail = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
     if fail.is_displayed():
+        # print the class that failed to enroll by checking the text of the element
+
         print('Class ' + str(i) + ' failed to enroll')
         if sendDiscordNotification:
             import requests
