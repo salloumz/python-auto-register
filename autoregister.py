@@ -45,6 +45,8 @@ enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAME
 driver.get(enrollmentPage)
 
 # TODO: implement verbose mode
+
+# TODO: Encrypt username, password and totp secret
 # grab username from file
 usernameFile = open('username.txt', 'r')
 username = usernameFile.read()
