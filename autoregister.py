@@ -184,7 +184,33 @@ driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#
 # Check if any classes failed to enroll
 # success = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
 # fail = win2divDERIVED_REGFRM1_DESCRLONG$x
-# TODO: implement
+
+# Wait for the loading screen to go away
+WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
+WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
+
+# Experimental: check if the fail ID is displayed
+for i in range(enrollnum):
+    fail = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_DESCRLONG$' + str(i))
+    if fail.is_displayed():
+        print('Class ' + str(i) + ' failed to enroll')
+        if sendDiscordNotification:
+            import requests
+            # timestamp
+            timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
+            # send a discord notification
+            data = {
+                "username" : "LionPath Sniper",
+            }
+            data["embeds"] = [
+                {
+                    "title" : ":warning: Some classes failed to enroll.",
+                    # description should be a timestamp
+                    "description" : "Class " + str(i) + " failed to enroll at " + str(timestamp),
+                    "color" : 0x00ff00
+                }
+            ]
+            requests.post(discordWebhookURL, json = data)
 
 
 
