@@ -209,7 +209,7 @@ for i in range(enrollnum):
         if sendDiscordNotification:
             import requests
             # timestamp
-            timestamp = datetime.datetime.now().strftime("%I:%M:%S %p")
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
             # send a discord notification
             data = {
                 "username" : "LionPath Sniper",
