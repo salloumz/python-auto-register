@@ -59,6 +59,8 @@ else:
             driver = webdriver.Edge()
         else:
             driver = webdriver.Chrome()
+    else:
+        print('Unsupported operating system')
 
 # we need to maximize the window so that all elements are visible
 driver.maximize_window()
