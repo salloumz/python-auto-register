@@ -56,12 +56,7 @@ else:
         # Windows, edgedriver, Edge
         # Experimental, not fully implemented 
         print('Windows')
-        # check for edgedriver
-        if not os.path.exists('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe'):
-            print('Edgedriver is not installed. Please install it from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/')
-            exit()
-        edgedriver = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedgedriver.exe"
-        driver = webdriver.Edge(service=Service(edgedriver))
+        driver = webdriver.Edge()
 
 # we need to maximize the window so that all elements are visible
 driver.maximize_window()
