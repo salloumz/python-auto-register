@@ -14,53 +14,37 @@ import pyotp
 from selenium.webdriver.chrome.service import Service
 from config import *
 
-chromeoptions = webdriver.ChromeOptions()
-
-# TODO: Add support for Chrome
-# Brave Browser
-# mainly for development purposes
-if useBrave:
-    if platform == "linux" or platform == "linux2":
-        # Linux, chromedriver, Brave
-        print('Linux, Brave')
-        chromedriver = "/usr/bin/chromedriver"
+if platform == "linux" or platform == "linux2":
+    # Linux
+    chromeoptions = webdriver.ChromeOptions()
+    if useBrave:
         chromeoptions.binary_location = '/usr/bin/brave'
-        chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
-        chromeoptions.add_argument("--enable-gpu-rasterization")
-        # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
-        # chromeoptions.add_argument("--user-data-dir=/home/dylank/.config/BraveSoftware/Brave-Browser")
-        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
-    elif platform == "darwin":
-        # MacOS, chromedriver, Brave
-        # Dropped support for Safari, there are too many issues with it, and it's slow
-        print('macOS, Brave')
-        chromedriver = "/opt/homebrew/bin/chromedriver"
-        chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-        # chromeoptions.add_argument("--user-data-dir=brave-data-dir")
-        # chromeoptions.add_argument("--user-data-dir=/Users/dylank/Library/Application Support/BraveSoftware/Brave-Browser")
-        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
-    else:
-        print('Unsupported operating system')
-# for production
-else:
-    if platform == "linux" or platform == "linux2":
-        # Linux
-        chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
-        chromeoptions.add_argument("--enable-gpu-rasterization")
-        driver = webdriver.Chrome(options=chromeoptions)
-    elif platform == "darwin":
-        # MacOS
-        print('macOS')
+    chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
+    chromeoptions.add_argument("--enable-gpu-rasterization")
+    driver = webdriver.Chrome(options=chromeoptions)
+elif platform == "darwin":
+    # MacOS
+    print('macOS')
+    if useBrave:
+        chromeoptions = webdriver.ChromeOptions()
+        chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"    
         driver = webdriver.Chrome()
-    elif platform == "win32":
-        # Windows, edgedriver, Edge
-        print('Windows')
-        if useEdge:
-            driver = webdriver.Edge()
-        else:
-            driver = webdriver.Chrome()
     else:
-        print('Unsupported operating system')
+        driver = webdriver.Chrome()
+elif platform == "win32":
+    # Windows, edgedriver, Edge
+    print('Windows')
+    if useBrave:
+        chromeoptions = webdriver.ChromeOptions()
+        chromeoptions.binary_location = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+        driver = webdriver.Chrome(options=chromeoptions)
+    elif useEdge:
+        driver = webdriver.Edge()
+    else:
+        driver = webdriver.Chrome()
+else:
+    # may add BSD support in the future
+    print('Unsupported operating system')
 
 # we need to maximize the window so that all elements are visible
 driver.maximize_window()
