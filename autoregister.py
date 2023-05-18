@@ -44,40 +44,14 @@ if useBrave:
 # for production
 else:
     if platform == "linux" or platform == "linux2":
-        # Linux, chromedriver, chromium
-        print('Linux')
-        # check if chromium is installed
-        if not os.path.exists('/usr/bin/chromium'):
-            print('Chromium is not installed. Please install it with your package manager.')
-            exit()
-        # check for chromedriver
-        if not os.path.exists('/usr/bin/chromedriver'):
-            print('Chromedriver is not installed. Please install it with your package manager.')
-            exit()
-        chromedriver = "/usr/bin/chromedriver"
-        chromeoptions.binary_location = '/usr/bin/chromium'
+        # Linux
         chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
         chromeoptions.add_argument("--enable-gpu-rasterization")
-        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+        driver = webdriver.Chrome(options=chromeoptions)
     elif platform == "darwin":
-        # MacOS, chromedriver, chromium/chrome
-        # Dropped support for Safari, there are too many issues with it
+        # MacOS
         print('macOS')
-        # check for chromium
-        if os.path.exists('/Applications/Chromium.app/Contents/MacOS/Chromium'):
-            chromeoptions.binary_location = '/Applications/Chromium.app/Contents/MacOS/Chromium'
-        # check for chrome
-        elif os.path.exists('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'):
-            chromeoptions.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-        else:
-            print('Chromium or Google Chrome is not installed. Please install one of them to continue. https://www.google.com/chrome/')
-            exit()
-        # check for chromedriver
-        if not os.path.exists('/opt/homebrew/bin/chromedriver'):
-            print('Chromedriver is not installed. Please install it with Homebrew: brew install --cask chromedriver')
-            exit()
-            chromedriver = "/opt/homebrew/bin/chromedriver"
-        driver = webdriver.Chrome(service=Service(chromedriver), options=chromeoptions)
+        driver = webdriver.Chrome()
     elif platform == "win32":
         # Windows, edgedriver, Edge
         # Experimental, not fully implemented 
