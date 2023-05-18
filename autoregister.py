@@ -32,7 +32,7 @@ elif platform == "darwin":
     else:
         driver = webdriver.Chrome()
 elif platform == "win32":
-    # Windows, edgedriver, Edge
+    # Windows
     print('Windows')
     if useBrave:
         chromeoptions = webdriver.ChromeOptions()
