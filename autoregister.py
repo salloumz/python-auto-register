@@ -54,7 +54,6 @@ else:
         driver = webdriver.Chrome()
     elif platform == "win32":
         # Windows, edgedriver, Edge
-        # Experimental, not fully implemented 
         print('Windows')
         driver = webdriver.Edge()
 
