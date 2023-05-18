@@ -55,7 +55,10 @@ else:
     elif platform == "win32":
         # Windows, edgedriver, Edge
         print('Windows')
-        driver = webdriver.Edge()
+        if useEdge:
+            driver = webdriver.Edge()
+        else:
+            driver = webdriver.Chrome()
 
 # we need to maximize the window so that all elements are visible
 driver.maximize_window()

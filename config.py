@@ -8,7 +8,9 @@ enrollnum = 2
 waitUntil12AM = False
 # Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
 useTOTP = True
-# Experimental // Not fully implemented
+# [Windows] Microsoft Edge Support (instead of Chrome)
+useEdge = True
+# Experimental // Development
 # Should we send a notification in Discord with results/if a class fails to enroll?
 sendDiscordNotification = False
 # Discord Webhook URL
