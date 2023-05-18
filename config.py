@@ -8,14 +8,16 @@ enrollnum = 2
 waitUntil12AM = False
 # Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
 useTOTP = True
+# [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)
+useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
 useEdge = True
-# Experimental // Development
 # Should we send a notification in Discord with results/if a class fails to enroll?
 sendDiscordNotification = False
 # Discord Webhook URL
 discordWebhookURL = ""
+# Experimental // Development
+# Create a file with the results?
+resultFile = "None"
 # Should we send an email with results/if a class fails to enroll?
 sendEmailNotification = False
-# Should we use the Brave Browser instead of the built in one?
-useBrave = False
