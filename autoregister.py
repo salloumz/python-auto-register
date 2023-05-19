@@ -203,12 +203,16 @@ while not driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL').is_displaye
 
 # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
 for i in range(enrollnum):
-    checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
+    # checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
+    # test using xpath rather than id
+    checkbox = driver.find_element(By.XPATH, '//*[@id="DERIVED_REGFRM1_SSR_SELECT$' + str(i) + '"]')
     ActionChains(driver).click(checkbox).perform()
 
 # Hit the enroll button
-enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
-ActionChains(driver).click(enrollButton).perform()
+# enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
+# ActionChains(driver).click(enrollButton).perform()
+# Run the javascript to click the enroll button
+driver.execute_script("javascript:submitAction_win2(document.win2,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
 
 # Wait for yes button to appear
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
