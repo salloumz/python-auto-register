@@ -235,7 +235,7 @@ for i in range(enrollnum):
         # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
         failMessage = divHTML.splitlines()[2:-2][0]
         # print the class that failed to enroll by checking the text of the element
-        print("Class \"" + className + "\" failed to enroll")
+        print("\"" + className + "\" failed to enroll")
         if sendDiscordNotification:
             import requests
             # timestamp
@@ -257,7 +257,7 @@ for i in range(enrollnum):
         divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
         # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
         successMessage = divHTML.splitlines()[2:-2][0]
-        print("Class \"" + className + "\" successfully enrolled")
+        print("\"" + className + "\" successfully enrolled")
         if sendDiscordNotification:
             import requests
             # timestamp
