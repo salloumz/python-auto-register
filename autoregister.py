@@ -31,7 +31,7 @@ try:
         driver = webdriver.Chrome(options=chromeoptions)
     elif platform == "darwin":
         # MacOS
-        print('macOS' + os.uname().machine)
+        print('Running on macOS ' + os.uname().machine)
         chromeoptions = webdriver.ChromeOptions()
         if useBrave:
             chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
@@ -41,7 +41,7 @@ try:
         driver = webdriver.Chrome(options=chromeoptions)
     elif platform == "win32":
         # Windows
-        print('Windows' + os.uname().machine)
+        print('Running on Windows ' + os.uname().machine)
         chromeoptions = webdriver.ChromeOptions()
         if darkMode:
             chromeoptions.add_argument("--force-dark-mode")
@@ -262,7 +262,7 @@ try:
             divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
             # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
             successMessage = divHTML.splitlines()[2:-2][0]
-            print("\"" + className + "\" successfully enrolled")
+            print("\"" + className + "\" enrolled successfully")
             if sendDiscordNotification:
                 import requests
                 # timestamp
@@ -295,7 +295,7 @@ except Exception as e:
             }
             data["embeds"] = [
                 {
-                    "title" : ":x: **An exception occurred**",
+                    "title" : ":x: **Exception occurred**",
                     "description" : "**" + e + "**\n\n" + str(timestamp),
                     "color" : 0xff0000
                 }
