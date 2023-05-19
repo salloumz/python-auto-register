@@ -153,7 +153,7 @@ def autoregister():
         #     radiobtn = radio3
 
         # Select the radio button by clicking on it with actionchains
-        ActionChains(driver).click(radiobtn).perform()
+        # ActionChains(driver).click(radiobtn).perform()
 
 
         # Click continue
