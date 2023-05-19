@@ -193,7 +193,7 @@ if datetime.datetime.now().hour != 0 and waitUntil12AM:
         # id="ps_loginmessagelarge"
         # if it is, raise an exception
         try:
-            driver.find_element(By.ID, 'ps_loginmessagelarge').is_displayed()
+            driver.find_element(By.XPATH, '//*[@id="login"]/div/div/div/p[4]/a').is_displayed()
             raise Exception('Your session has expired. Please log in again.')
         except:
             pass
