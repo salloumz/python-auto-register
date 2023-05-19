@@ -15,6 +15,7 @@ from selenium.webdriver.chrome.service import Service
 from config import *
 
 def autoregister():
+    # TODO: use find_elements rather than find_element with a try catch exception 
     try:
         if platform == "linux":
             # Linux
