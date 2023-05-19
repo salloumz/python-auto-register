@@ -67,7 +67,6 @@ passwordFile = open('password.txt', 'r')
 password = passwordFile.read()
 passwordFile.close()
 
-# TODO: Fix "You didn't enter an expected verification code. Please try again."
 if useTOTP:
     # get totp token from file
     totpfile = open('totpsecret.txt', 'r')
@@ -112,14 +111,7 @@ if useTOTP:
     while True:
         # if the view details button is visible, we are on the login page
         if driver.find_elements(By.ID, 'ViewDetails'):
-            # delete everything in the totp input box
-            driver.find_element(By.NAME, 'otc').clear()
-            # get the new totp code
-            totpcode = totp.now()
-            # type the new totp code
-            driver.find_element(By.NAME, 'otc').send_keys(totpcode)
-            # Send enter key
-            driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
+            raise Exception('You didn\'t enter an expected verification code. Please try again.')
         # if the view details button is not visible, we are on the enrollment page
         elif driver.find_elements(By.ID, 'main_target_win0'):
             break
