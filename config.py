@@ -6,6 +6,8 @@ radnum = 2
 enrollnum = 2
 # Should we wait until 12AM to enroll?
 waitUntil12AM = False
+# Enable dark mode?
+darkMode = True
 # Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
 useTOTP = True
 # [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)

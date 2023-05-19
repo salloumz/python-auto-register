@@ -19,29 +19,37 @@ if platform == "linux" or platform == "linux2":
     chromeoptions = webdriver.ChromeOptions()
     if useBrave:
         chromeoptions.binary_location = '/usr/bin/brave'
+    if darkMode:
+        chromeoptions.add_argument("--force-dark-mode")
+        chromeoptions.add_argument("--enable-features=WebContentsForceDark")
+    # enable hardware acceleration on linux
     chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
     chromeoptions.add_argument("--enable-gpu-rasterization")
     driver = webdriver.Chrome(options=chromeoptions)
 elif platform == "darwin":
     # MacOS
     print('macOS')
+    chromeoptions = webdriver.ChromeOptions()
     if useBrave:
-        chromeoptions = webdriver.ChromeOptions()
-        chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"    
-        driver = webdriver.Chrome()
-    else:
-        driver = webdriver.Chrome()
+        chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+    if darkMode:
+        chromeoptions.add_argument("--force-dark-mode")
+        chromeoptions.add_argument("--enable-features=WebContentsForceDark")    
+    driver = webdriver.Chrome(options=chromeoptions)
 elif platform == "win32":
     # Windows
     print('Windows')
+    chromeoptions = webdriver.ChromeOptions()
+    if darkMode:
+        chromeoptions.add_argument("--force-dark-mode")
+        chromeoptions.add_argument("--enable-features=WebContentsForceDark")
     if useBrave:
-        chromeoptions = webdriver.ChromeOptions()
         chromeoptions.binary_location = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
         driver = webdriver.Chrome(options=chromeoptions)
     elif useEdge:
-        driver = webdriver.Edge()
+        driver = webdriver.Edge(options=chromeoptions)
     else:
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(options=chromeoptions)
 else:
     # may add BSD support in the future
     print('Unsupported operating system')
