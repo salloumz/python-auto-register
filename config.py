@@ -21,6 +21,8 @@ sendDiscordNotification = False
 # Discord Webhook URL
 discordWebhookURL = ""
 # Experimental // Development
+# Do you want to show off with discord rich presence?
+discordRPC = False
 # Create a file with the results?
 resultFile = "None"
 # Should we send an email with results/if a class fails to enroll?
