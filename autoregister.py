@@ -207,7 +207,7 @@ if datetime.datetime.now().hour != 0 and waitUntil12AM:
 driver.refresh()
 
 # TODO: attempt to check if the enroll button is visible, otherwise refresh the page
-while not driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL').is_displayed():
+while not driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]').is_displayed():
     # refresh the page
     print('Waiting for enroll button to appear')
     driver.refresh()
@@ -227,7 +227,7 @@ for i in range(enrollnum):
 driver.execute_script("javascript:submitAction_win2(document.win2,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
 
 # Wait for yes button to appear
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, '#ICYes')))
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="#ICYes"]')))
 
 # Run the javascript to click the yes button
 driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
