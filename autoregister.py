@@ -107,6 +107,23 @@ if useTOTP:
     # Send enter key
     driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
 
+    # If the expected verification code is not entered, we need to try a different one
+    # check for id 'ViewDetails' or the login page
+    while True:
+        # if the view details button is visible, we are on the login page
+        if driver.find_elements(By.ID, 'ViewDetails'):
+            # delete everything in the totp input box
+            driver.find_element(By.NAME, 'otc').clear()
+            # get the new totp code
+            totpcode = totp.now()
+            # type the new totp code
+            driver.find_element(By.NAME, 'otc').send_keys(totpcode)
+            # Send enter key
+            driver.find_element(By.NAME, 'otc').send_keys(u'\ue007')
+        # if the view details button is not visible, we are on the enrollment page
+        elif driver.find_elements(By.ID, 'main_target_win0'):
+            break
+
 # Wait for the iframe to become visible
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
 
