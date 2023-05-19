@@ -129,9 +129,8 @@ def autoregister():
         # Switch to the iframe
         driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 
-        # TODO: automatically detect each button
         # we can automatically detect the buttons by using the id's and x
-        # we can create a list of buttons and iterate through them
+        # create a list of all the buttons and iterate through them
         radioList = []
         while True:
             try:
@@ -140,22 +139,6 @@ def autoregister():
                 break
         # pick the radio button using the enrollnum
         ActionChains(driver).click(radioList[radnum - 1]).perform()
-        # Radio buttons for each semester
-        # radio1 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$0$$0')
-        # radio2 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$1$$0')
-        # radio3 = driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$2$$0')
-
-        # pick the radio button using the enrollnum
-        # if radnum == 1:
-        #     radiobtn = radio1
-        # elif radnum == 2:
-        #     radiobtn = radio2
-        # elif radnum == 3:
-        #     radiobtn = radio3
-
-        # Select the radio button by clicking on it with actionchains
-        # ActionChains(driver).click(radiobtn).perform()
-
 
         # Click continue
         continueButton = driver.find_element(By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')
@@ -167,25 +150,10 @@ def autoregister():
         # get out of the iframe
         driver.switch_to.default_content()
 
-        # Go to the shopping cart
-        # Method 1: Click the shopping cart button
-        # shoppingCartButton = driver.find_element(By.XPATH, '//*[@id="win1divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$4"]')
-        # ActionChains(driver).click(shoppingCartButton).perform()
-        # Method 2: Go directly to the shopping cart url
+        # Go directly to the shopping cart url
         driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true')
 
-        # wait for the loading screen to go away
-        # (only needed if we use method 1)
-        # WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
-
-        # Method 1: click the enroll button to unglitch the page
-        # enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
-        # ActionChains(driver).click(enrollButton).perform()
-        # WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
-        # time.sleep(0.1)
-
-        # Method 2: refresh to unglitch the page
-        # refresh the page
+        # refresh to unglitch the page
         driver.refresh()
 
         if datetime.datetime.now().hour != 0 and waitUntil12AM:
@@ -193,7 +161,6 @@ def autoregister():
             # Wait until 12AM
             while datetime.datetime.now().hour != 0:
                 # check if the "Your session is about to expire" popup is visible
-                # id="#ICOK"
                 # if it is, run javascript:pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();
                 try: 
                     driver.find_element(By.ID, '#ICOK').is_displayed()
@@ -201,8 +168,7 @@ def autoregister():
                 except:
                     pass
                 # check if the "Your session has expired" popup is visible
-                # id="ps_loginmessagelarge"
-                # if it is, raise an exception
+                # if it is, raise an exception to stop execution
                 try:
                     driver.find_element(By.XPATH, '//*[@id="login"]/div/div/div/p[4]/a').is_displayed()
                     raise Exception('Your session has expired. Please log in again.')
@@ -215,13 +181,13 @@ def autoregister():
         # refresh the page to reveal the enroll button
         driver.refresh()
 
-        # TODO: attempt to check if the enroll button is visible, otherwise refresh the page
+        # Wait for the enroll button to appear
         while not driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]').is_displayed():
             # refresh the page
             print('Waiting for enroll button to appear')
             driver.refresh()
 
-        # see how many checkboxes there are
+        # create a list of all the checkboxes
         # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
         checkboxList = []
         while True:
@@ -229,20 +195,11 @@ def autoregister():
                 checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
             except:
                 break
-        # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
-        # for i in range(enrollnum):
-        #     # checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
-        #     # test using xpath rather than id
-        #     checkbox = driver.find_element(By.XPATH, '//*[@id="DERIVED_REGFRM1_SSR_SELECT$' + str(i) + '"]')
-        #     ActionChains(driver).click(checkbox).perform()
-        print(checkboxList)
         # click all the checkboxes in the list
         for i in range(len(checkboxList)):
             ActionChains(driver).click(checkboxList[i - 1]).perform()
 
         # Hit the enroll button
-        # enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
-        # ActionChains(driver).click(enrollButton).perform()
         # Run the javascript to click the enroll button
         driver.execute_script("javascript:submitAction_win2(document.win2,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
 
@@ -253,24 +210,22 @@ def autoregister():
         driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
         # Check if any classes failed to enroll
-        # success = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
-        # fail = win2divDERIVED_REGFRM1_DESCRLONG$x where x is a number
+        # success id = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
+        # fail id = win2divDERIVED_REGFRM1_DESCRLONG$x where x is a number
 
         # Wait for the loading screen to go away
         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
 
-        # Experimental: check if the fail ID is displayed
-        for i in range(enrollnum):
+        # check if the fail ID is displayed
+        for i in range(len(checkboxList)):
             classObj = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
             className = classObj.text
             # check to see if the class was fail or success
             # if the fail element exists
             if driver.find_elements(By.ID, 'win2divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
-                # we also need to get the ps-htmlarea div contained within id win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$1
                 divHTML = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
-                # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
+                # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the fail message by itself
                 failMessage = divHTML.splitlines()[2:-2][0]
-                # print the class that failed to enroll by checking the text of the element
                 print("\"" + className + "\" failed to enroll")
                 if sendDiscordNotification:
                     import requests
@@ -291,7 +246,7 @@ def autoregister():
             # else if the success element exists
             elif driver.find_elements(By.ID, 'win0divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
                 divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
-                # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string
+                # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the success message by itself
                 successMessage = divHTML.splitlines()[2:-2][0]
                 print("\"" + className + "\" enrolled successfully")
                 if sendDiscordNotification:
@@ -311,18 +266,18 @@ def autoregister():
                     ]
                     requests.post(discordWebhookURL, json = data)
 
+        input('Finished. Press enter to close the program.')
         driver.close
 
-        input('Finished. Press enter to close the program.')
     except Exception as e:
         print(e)
         driver.close()
         autoregister()
 
-# function to run the autoregister() function at 11:57 PM
 def waitTimer():
     while True:
         time.sleep(1)
+        # wait until 11:57 PM, 3 minutes before the registration window opens
         if datetime.datetime.now().hour == 23 and datetime.datetime.now().minute == 57:
             autoregister()
                 
