@@ -7,7 +7,7 @@ enrollnum = 2
 # Should we wait until 12AM to enroll?
 waitUntil12AM = False
 # Should the program wait until 3 minutes before 12AM to start?
-waitTimer = False
+waitTimerEnable = False
 # Enable dark mode?
 darkMode = True
 # Is TOTP enabled for this Microsoft account? If so, it can be automated in the script

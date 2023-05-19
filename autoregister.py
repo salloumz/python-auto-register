@@ -17,7 +17,6 @@ def autoregister():
 
     if platform == "linux":
         # Linux
-        # print OS name
         print('Running on Linux ' + os.uname().machine)
         chromeoptions = webdriver.ChromeOptions()
         if useBrave:
@@ -306,9 +305,11 @@ def waitTimer():
                 autoregister()
                 
 def main():
-    if waitTimer:
+    if waitTimerEnable:
+        print('Case 1')
         waitTimer()
     else:
+        print('Case 2')
         try:
             autoregister()
         except Exception as e:
