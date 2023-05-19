@@ -1,11 +1,13 @@
 import subprocess
 import time
 import datetime
+from config import *
 
 def run():
     try:
-        subprocess.call(['python3', 'autoregister.py'])
-    except Exception as e:
+        subprocess.check_call(['python3', 'autoregister.py'])
+    except subprocess.CalledProcessError as e:
+        # TODO: discord notification
         print(e)
         run()
     finally:
@@ -13,3 +15,5 @@ def run():
 
 while datetime.datetime.now().hour == 23 and datetime.datetime.now().minute == 58:
     run()
+
+# run()
