@@ -174,9 +174,8 @@ def autoregister():
                     raise Exception('Your session has expired. Please log in again.')
                 except:
                     pass
-                # wait 1 second
+                # increase interval if the program is using too many resources
                 time.sleep(0.1)
-                # refresh the page
 
         # refresh the page to reveal the enroll button
         driver.refresh()
