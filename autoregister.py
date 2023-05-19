@@ -179,17 +179,29 @@ driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUD
 # refresh the page
 driver.refresh()
 
-# Wait until 12AM
-while datetime.datetime.now().hour != 0 and waitUntil12AM:
-    # check if the "Your session is about to expire" popup is visible
-    # id="#ICOK"
-    # if it is, run javascript:pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();
-    if driver.find_element(By.ID, '#ICOK').is_displayed():
-        driver.execute_script('pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();')
-    # wait 1 second
-    time.sleep(0.1)
-    # refresh the page
+if datetime.datetime.now().hour != 0 and waitUntil12AM:
     print('Waiting for 12AM')
+    # Wait until 12AM
+    while datetime.datetime.now().hour != 0:
+        # check if the "Your session is about to expire" popup is visible
+        # id="#ICOK"
+        # if it is, run javascript:pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();
+        try: 
+            driver.find_element(By.ID, '#ICOK').is_displayed()
+            driver.execute_script('pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();')
+        except:
+            pass
+        # check if the "Your session has expired" popup is visible
+        # id="ps_loginmessagelarge"
+        # if it is, raise an exception
+        try:
+            driver.find_element(By.ID, 'ps_loginmessagelarge').is_displayed()
+            raise Exception('Your session has expired. Please log in again.')
+        except:
+            pass
+        # wait 1 second
+        time.sleep(0.1)
+        # refresh the page
 
 # refresh the page to reveal the enroll button
 driver.refresh()
