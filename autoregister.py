@@ -14,8 +14,10 @@ import pyotp
 from selenium.webdriver.chrome.service import Service
 from config import *
 
-if platform == "linux" or platform == "linux2":
+if platform == "linux":
     # Linux
+    # print OS name
+    print('Running on Linux ' + os.uname().machine)
     chromeoptions = webdriver.ChromeOptions()
     if useBrave:
         chromeoptions.binary_location = '/usr/bin/brave'
@@ -28,7 +30,7 @@ if platform == "linux" or platform == "linux2":
     driver = webdriver.Chrome(options=chromeoptions)
 elif platform == "darwin":
     # MacOS
-    print('macOS')
+    print('macOS' + os.uname().machine)
     chromeoptions = webdriver.ChromeOptions()
     if useBrave:
         chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
@@ -38,7 +40,7 @@ elif platform == "darwin":
     driver = webdriver.Chrome(options=chromeoptions)
 elif platform == "win32":
     # Windows
-    print('Windows')
+    print('Windows' + os.uname().machine)
     chromeoptions = webdriver.ChromeOptions()
     if darkMode:
         chromeoptions.add_argument("--force-dark-mode")
@@ -52,7 +54,7 @@ elif platform == "win32":
         driver = webdriver.Chrome(options=chromeoptions)
 else:
     # may add BSD support in the future
-    print('Unsupported operating system')
+    print(platform + ' is not supported.')
 
 # we need to maximize the window so that all elements are visible
 driver.maximize_window()
