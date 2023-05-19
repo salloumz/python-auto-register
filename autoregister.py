@@ -282,7 +282,7 @@ for i in range(enrollnum):
             }
             data["embeds"] = [
                 {
-                    "title" : ":white_check_mark: **" + className + "**",
+                    "title" : ":heavy_check_mark: **" + className + "**",
                     "description" : "**" + successMessage + "**\n\n" + str(timestamp),
                     "color" : 0x00ff00
                 }
