@@ -1,3 +1,4 @@
+# Enable Raised Exceptions in vscode for debugging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -220,13 +221,24 @@ def autoregister():
             print('Waiting for enroll button to appear')
             driver.refresh()
 
-
+        # see how many checkboxes there are
+        # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
+        checkboxList = []
+        while True:
+            try:
+                checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
+            except:
+                break
         # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0 and going to enrollnum - 1
-        for i in range(enrollnum):
-            # checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
-            # test using xpath rather than id
-            checkbox = driver.find_element(By.XPATH, '//*[@id="DERIVED_REGFRM1_SSR_SELECT$' + str(i) + '"]')
-            ActionChains(driver).click(checkbox).perform()
+        # for i in range(enrollnum):
+        #     # checkbox = driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(i))
+        #     # test using xpath rather than id
+        #     checkbox = driver.find_element(By.XPATH, '//*[@id="DERIVED_REGFRM1_SSR_SELECT$' + str(i) + '"]')
+        #     ActionChains(driver).click(checkbox).perform()
+        print(checkboxList)
+        # click all the checkboxes in the list
+        for i in range(len(checkboxList)):
+            ActionChains(driver).click(checkboxList[i - 1]).perform()
 
         # Hit the enroll button
         # enrollButton = driver.find_element(By.ID, 'DERIVED_SSR_FL_SSR_ENROLL_FL')
