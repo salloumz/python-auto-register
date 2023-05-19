@@ -1,29 +1,26 @@
 # Config Options
-# Which semester are you enrolling in? (Which radio button should be selected?)
+# Which semester to enroll in (which radio button to click starting from 1)
 radnum = 2
-# How many classes are you enrolling in?
-# TODO: we can auto detect this by counting the number of checkboxes
-enrollnum = 2
-# Should we wait until 12AM to enroll?
+# Wait for 12AM to enroll
 waitUntil12AM = False
-# Should the program wait until 3 minutes before 12AM to start?
+# Wait until 3 minutes before 12AM to start the script
 waitTimerEnable = False
-# Enable dark mode?
+# Dark Mode
 darkMode = True
-# Is TOTP enabled for this Microsoft account? If so, it can be automated in the script
+# TOTP Support (2FA)
 useTOTP = True
 # [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)
 useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
 useEdge = True
-# Should we send a notification in Discord with results/if a class fails to enroll?
+# Discord Webhook Integration
 sendDiscordNotification = False
 # Discord Webhook URL
 discordWebhookURL = ""
 # Experimental // Development
-# Do you want to show off with discord rich presence?
+# RPC Integration
 discordRPC = False
-# Create a file with the results?
+# File to save results to, leave as "None" to disable
 resultFile = "None"
-# Should we send an email with results/if a class fails to enroll?
+# Email Notification with results
 sendEmailNotification = False
