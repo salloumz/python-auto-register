@@ -19,40 +19,43 @@ def autoregister():
         if platform == "linux":
             # Linux
             print('Running on Linux')
-            chromeoptions = webdriver.ChromeOptions()
+            options = webdriver.ChromeOptions()
             if useBrave:
-                chromeoptions.binary_location = '/usr/bin/brave'
+                options.binary_location = '/usr/bin/brave'
             if darkMode:
-                chromeoptions.add_argument("--force-dark-mode")
-                chromeoptions.add_argument("--enable-features=WebContentsForceDark")
+                options.add_argument("--force-dark-mode")
+                options.add_argument("--enable-features=WebContentsForceDark")
             # enable hardware acceleration on linux
-            chromeoptions.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
-            chromeoptions.add_argument("--enable-gpu-rasterization")
-            driver = webdriver.Chrome(options=chromeoptions)
+            options.add_argument("--enable-features=VaapiVideoEncoder,VaapiVideoDecoder")
+            options.add_argument("--enable-gpu-rasterization")
+            driver = webdriver.Chrome(options=options)
         elif platform == "darwin":
             # MacOS
             print('Running on macOS')
-            chromeoptions = webdriver.ChromeOptions()
+            options = webdriver.ChromeOptions()
             if useBrave:
-                chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+                options.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
             if darkMode:
-                chromeoptions.add_argument("--force-dark-mode")
-                chromeoptions.add_argument("--enable-features=WebContentsForceDark")    
-            driver = webdriver.Chrome(options=chromeoptions)
+                options.add_argument("--force-dark-mode")
+                options.add_argument("--enable-features=WebContentsForceDark")    
+            driver = webdriver.Chrome(options=options)
         elif platform == "win32":
             # Windows
             print('Running on Windows')
-            chromeoptions = webdriver.ChromeOptions()
-            if darkMode:
-                chromeoptions.add_argument("--force-dark-mode")
-                chromeoptions.add_argument("--enable-features=WebContentsForceDark")
-            if useBrave:
-                chromeoptions.binary_location = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
-                driver = webdriver.Chrome(options=chromeoptions)
-            elif useEdge:
-                driver = webdriver.Edge(options=chromeoptions)
+            if useEdge:
+                options = webdriver.EdgeOptions
             else:
-                driver = webdriver.Chrome(options=chromeoptions)
+                options = webdriver.ChromeOptions()
+            if darkMode:
+                options.add_argument("--force-dark-mode")
+                options.add_argument("--enable-features=WebContentsForceDark")
+            if useBrave:
+                options.binary_location = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+                driver = webdriver.Chrome(options=options)
+            elif useEdge:
+                driver = webdriver.Edge(options=options)
+            else:
+                driver = webdriver.Chrome(options=options)
         else:
             # may add BSD support in the future
             print(platform + ' is not supported.')
@@ -270,7 +273,8 @@ def autoregister():
 
     except Exception as e:
         print(e)
-        driver.close()
+        if driver:
+            driver.close()
         autoregister()
 
 def waitTimer():
