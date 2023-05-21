@@ -46,8 +46,8 @@ You can configure the script by editing the `config.py` file. The following opti
 - `waitTimerEnable`: Wait until 3 minutes before 12AM to start the script (saves resources, but you can disable this to run the script manually)
 - `darkMode`: Dark Mode (sets the browser to dark mode, also sets the LionPath website to dark mode)
 - `useTOTP`: TOTP Support for 2FA (TOTP must be enabled and set as the default method on your Microsoft account for this to work)
-- 'useBrave': Brave Browser Support
-- 'useEdge': Microsoft Edge Support
+- `useBrave`: Brave Browser Support
+- `useEdge`: Microsoft Edge Support
 - `sendDiscordNotification`: Discord Webhook Integration (sends enrollment results to Discord via a webhook)
 - `discordWebhookURL`: Discord Webhook URL (the webhook URL to send enrollment results to)
 
