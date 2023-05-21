@@ -273,6 +273,8 @@ def autoregister():
         driver.close
 
     except Exception as e:
+        # TODO: add cases for different exceptions
+        # TODO: send discord notification on exception
         print(e)
         driver.close()
         autoregister()
