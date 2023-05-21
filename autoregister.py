@@ -43,11 +43,12 @@ def autoregister():
             # Windows
             print('Running on Windows')
             if useEdge:
-                options = webdriver.EdgeOptions
+                options = webdriver.EdgeOptions()
             else:
                 options = webdriver.ChromeOptions()
             if darkMode:
-                options.add_argument("--force-dark-mode")
+                if not useEdge:
+                    options.add_argument("--force-dark-mode")
                 options.add_argument("--enable-features=WebContentsForceDark")
             if useBrave:
                 options.binary_location = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
@@ -273,8 +274,7 @@ def autoregister():
 
     except Exception as e:
         print(e)
-        if driver:
-            driver.close()
+        driver.close()
         autoregister()
 
 def waitTimer():
