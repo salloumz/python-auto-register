@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from sys import platform
-import os
 import time
 import datetime
 import hashlib
@@ -19,7 +18,7 @@ def autoregister():
     try:
         if platform == "linux":
             # Linux
-            print('Running on Linux ' + os.uname().machine)
+            print('Running on Linux')
             chromeoptions = webdriver.ChromeOptions()
             if useBrave:
                 chromeoptions.binary_location = '/usr/bin/brave'
@@ -32,7 +31,7 @@ def autoregister():
             driver = webdriver.Chrome(options=chromeoptions)
         elif platform == "darwin":
             # MacOS
-            print('Running on macOS ' + os.uname().machine)
+            print('Running on macOS')
             chromeoptions = webdriver.ChromeOptions()
             if useBrave:
                 chromeoptions.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
@@ -42,7 +41,7 @@ def autoregister():
             driver = webdriver.Chrome(options=chromeoptions)
         elif platform == "win32":
             # Windows
-            print('Running on Windows ' + os.uname().machine)
+            print('Running on Windows')
             chromeoptions = webdriver.ChromeOptions()
             if darkMode:
                 chromeoptions.add_argument("--force-dark-mode")
