@@ -59,7 +59,3 @@ This script is configured to send your enrollment results to Discord via a webho
 3. Click "Create Webhook".
 4. Enter a name for the webhook and click "Copy Webhook URL".
 5. Paste the webhook URL into the `discordWebhookURL` option in the `config.py` file.
-
-License
---
-This project is licensed under the GNU General Public License version 3.0 (GPLv3). You are allowed to modify and redistribute this project under the terms of the GPLv3. If you modify and distribute this project or its derivatives, you must make the source code available to users and distribute it under the GPLv3. Proper attribution to the original author(s) is required. See the [LICENSE](LICENSE) file for more information.
