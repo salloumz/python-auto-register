@@ -62,4 +62,4 @@ This script is configured to send your enrollment results to Discord via a webho
 
 License
 --
-This project is licensed under the GNU General Public License version 3.0 (GPLv3). You are allowed to modify and redistribute this project under the terms of the GPLv3. However, please note that the GPLv3 does allow commercial use of the project. If you modify and distribute this project or its derivatives, you must make the source code available to users and distribute it under the GPLv3. Proper attribution to the original author(s) is required. See the [LICENSE](LICENSE) file for more information.
+This project is licensed under the GNU General Public License version 3.0 (GPLv3). You are allowed to modify and redistribute this project under the terms of the GPLv3. If you modify and distribute this project or its derivatives, you must make the source code available to users and distribute it under the GPLv3. Proper attribution to the original author(s) is required. See the [LICENSE](LICENSE) file for more information.
