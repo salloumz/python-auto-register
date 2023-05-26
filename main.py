@@ -280,8 +280,26 @@ def autoregister():
 
     except Exception as e:
         # TODO: add cases for different exceptions
-        # TODO: send discord notification on exception
         print(e)
+        if sendDiscordNotification:
+            try:
+                import requests
+                # timestamp
+                timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+                # send a discord notification
+                data = {
+                    "username" : "LionPath Sniper",
+                }
+                data["embeds"] = [
+                    {
+                        "title" : ":warning: **An error occured in the main function**",
+                        "description" : "**" + str(e) + "**\n\n" + str(timestamp),
+                        "color" : 0xffff00
+                    }
+                ]
+                requests.post(discordWebhookURL, json = data)
+            except:
+                pass
         driver.close()
         autoregister()
 
