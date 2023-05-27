@@ -4,3 +4,4 @@ password.txt
 totpsecret.txt
 login/
 __pycache__
+logininfo.py
