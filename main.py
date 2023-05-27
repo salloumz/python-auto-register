@@ -12,6 +12,7 @@ import hashlib
 import pyotp
 from selenium.webdriver.chrome.service import Service
 from config import *
+from logininfo import *
 
 def autoregister():
     # TODO: use find_elements rather than find_element with a try catch exception 
@@ -76,21 +77,21 @@ def autoregister():
         enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
         driver.get(enrollmentPage)
 
-        # grab username from file
-        usernameFile = open('login/username.txt', 'r')
-        username = usernameFile.read()
-        usernameFile.close()
+        # # grab username from file
+        # usernameFile = open('username.txt', 'r')
+        # username = usernameFile.read()
+        # usernameFile.close()
 
-        # get password from file
-        passwordFile = open('login/password.txt', 'r')
-        password = passwordFile.read()
-        passwordFile.close()
+        # # get password from file
+        # passwordFile = open('password.txt', 'r')
+        # password = passwordFile.read()
+        # passwordFile.close()
 
-        if useTOTP:
-            # get totp token from file
-            totpfile = open('login/totpsecret.txt', 'r')
-            totpsecret = totpfile.read()
-            totpfile.close()
+        # if useTOTP:
+        #     # get totp token from file
+        #     totpfile = open('totpsecret.txt', 'r')
+        #     totpsecret = totpfile.read()
+        #     totpfile.close()
 
         # Login
 
@@ -98,7 +99,10 @@ def autoregister():
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'loginfmt')))
 
         # Type username
-        driver.find_element(By.NAME, 'loginfmt').send_keys(username)
+        driver.find_element(By.NAME, 'loginfmt').send_keys(username + '\n')
+        
+        # Send enter key
+        # driver.find_element(By.NAME, 'loginfmt').send_keys(u'\ue007')
 
         # Wait for password page
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'passwd')))
@@ -136,6 +140,7 @@ def autoregister():
                     break
         else:
             # wait for the enrollment page
+            # TODO: send system notifications?
             print('Please type your 2FA code and continue.')
             while True:
                 if driver.find_elements(By.ID, 'main_target_win0'):
@@ -155,9 +160,13 @@ def autoregister():
         # create a list of all the buttons and iterate through them
         radioList = []
         while True:
-            try:
+            # try:
+            #     radioList.append(driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'))
+            # except:
+            #     break
+            if driver.find_elements(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'):
                 radioList.append(driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'))
-            except:
+            else:
                 break
         # pick the radio button using the enrollnum
         ActionChains(driver).click(radioList[radnum - 1]).perform()
