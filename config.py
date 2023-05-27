@@ -22,9 +22,9 @@ discordRPC = True
 sendDiscordNotification = False
 # Discord Webhook URL
 discordWebhookURL = ""
-# Experimental // Development
 # File to save results to, leave as "None" to disable
-exportResults = False
+exportResults = True
+# Experimental // Development
 # Email Notification with results
 sendEmailNotification = False
 # Email Address to send results to

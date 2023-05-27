@@ -71,6 +71,7 @@ def autoregister():
             currentstate='Logging in...'
             RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
+        # TODO: fix chromedriver not connecting
         # we need to maximize the window so that all elements are visible
         driver.maximize_window()
         lionpath = "https://lionpath.psu.edu/"
@@ -284,6 +285,9 @@ def autoregister():
                         }
                     ]
                     requests.post(discordWebhookURL, json = data)
+                if exportResults:
+                    with open('results.csv', 'a') as f:
+                        f.write(className + ',' + failMessage + '\n')
             # else if the success element exists
             elif driver.find_elements(By.ID, 'win0divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
                 divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
@@ -306,7 +310,9 @@ def autoregister():
                         }
                     ]
                     requests.post(discordWebhookURL, json = data)
-
+                if exportResults:
+                    with open('results.csv', 'a') as f:
+                        f.write(className + ',' + successMessage + '\n')
         input('Finished. Press enter to close the program.')
         driver.close
 
