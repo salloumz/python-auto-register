@@ -69,18 +69,18 @@ def autoregister():
 
         # TODO: Encrypt username, password and totp secret
         # grab username from file
-        usernameFile = open('username.txt', 'r')
+        usernameFile = open('login/username.txt', 'r')
         username = usernameFile.read()
         usernameFile.close()
 
         # get password from file
-        passwordFile = open('password.txt', 'r')
+        passwordFile = open('login/password.txt', 'r')
         password = passwordFile.read()
         passwordFile.close()
 
         if useTOTP:
             # get totp token from file
-            totpfile = open('totpsecret.txt', 'r')
+            totpfile = open('login/totpsecret.txt', 'r')
             totpsecret = totpfile.read()
             totpfile.close()
 

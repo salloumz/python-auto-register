@@ -13,7 +13,7 @@ def generate_2fa_code(secret):
 
 def main():
     # get the secret from the totpsecret.txt file
-    totpsecret = open("totpsecret.txt", "r").read()
+    totpsecret = open("login/totpsecret.txt", "r").read()
     code = generate_2fa_code(totpsecret)
     print(code)
 
