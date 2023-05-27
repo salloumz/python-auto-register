@@ -27,3 +27,10 @@ discordWebhookURL = ""
 resultFile = "None"
 # Email Notification with results
 sendEmailNotification = False
+# Email Address to send results to
+emailAddress = ""
+# SMTP Settings for email notification
+smtpServer = ""
+smtpPort = 0
+smtpUsername = ""
+smtpPassword = ""
