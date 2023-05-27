@@ -24,7 +24,7 @@ sendDiscordNotification = False
 discordWebhookURL = ""
 # Experimental // Development
 # File to save results to, leave as "None" to disable
-resultFile = "None"
+exportResults = False
 # Email Notification with results
 sendEmailNotification = False
 # Email Address to send results to
