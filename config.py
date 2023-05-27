@@ -4,6 +4,7 @@ radnum = 2
 # Wait for 12AM to enroll
 waitUntil12AM = False
 # Wait until 3 minutes before 12AM to start the script
+# TODO: Make time configurable
 waitTimerEnable = False
 # Restart the script if an error occurs
 restartOnError = True
