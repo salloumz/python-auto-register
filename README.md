@@ -61,6 +61,11 @@ This script is configured to send your enrollment results to Discord via a webho
 4. Enter a name for the webhook and click "Copy Webhook URL".
 5. Paste the webhook URL into the `discordWebhookURL` option in the `config.py` file.
 
+Contribute
+--
+Contributions are always welcome! If you have any ideas or suggestions, please create an issue or a pull request.
+Recommended environment: [python3](https://www.python.org/downloads/) + [Visual Studio Code](https://code.visualstudio.com/) + [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
+
 Star me on GitHub!
 --
 If you like this project and found it useful, please consider giving it a star on GitHub and sharing it with your friends!
