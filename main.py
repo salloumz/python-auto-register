@@ -1,3 +1,5 @@
+# TODO: add github actions workflow
+# TODO: use find_elements rather than find_element with a try catch exception 
 # Enable Raised Exceptions in vscode for debugging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,7 +17,7 @@ from config import *
 from logininfo import *
 
 def autoregister():
-    # TODO: use find_elements rather than find_element with a try catch exception 
+    # TODO: add chrome headless support
     try:
         if platform == "linux":
             # Linux
