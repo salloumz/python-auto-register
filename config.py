@@ -15,13 +15,13 @@ useTOTP = True
 useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
 useEdge = True
+# RPC Integration
+discordRPC = True
 # Discord Webhook Integration
 sendDiscordNotification = False
 # Discord Webhook URL
 discordWebhookURL = ""
 # Experimental // Development
-# RPC Integration
-discordRPC = True
 # File to save results to, leave as "None" to disable
 resultFile = "None"
 # Email Notification with results
