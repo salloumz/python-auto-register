@@ -68,7 +68,7 @@ def autoregister():
             # with state 'Logging in,' large image 'sniper', large text 'LionPath Sniper', and start time as current time, and a button called 'LionPath Sniper' that links to the github page
             RPC.connect()
             currentstate='Logging in...'
-            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
         # we need to maximize the window so that all elements are visible
         driver.maximize_window()
@@ -146,7 +146,7 @@ def autoregister():
 
         if discordRPC:
             currentstate='Selecting semester'
-            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
         # Switch to the iframe
         driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
@@ -177,7 +177,7 @@ def autoregister():
 
         if discordRPC:
             currentstate='In shopping cart'
-            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
         # refresh to unglitch the page
         driver.refresh()
@@ -186,7 +186,7 @@ def autoregister():
             print('Waiting for 12AM')
             if discordRPC:
                 currentstate='Waiting for 12AM'
-                RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+                RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
             # Wait until 12AM
             while datetime.datetime.now().hour != 0:
                 # check if the "Your session is about to expire" popup is visible
@@ -246,7 +246,7 @@ def autoregister():
 
         if discordRPC:
             currentstate='Viewing results'
-            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
         # check if the fail ID is displayed
         for i in range(len(checkboxList)):
