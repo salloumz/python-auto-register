@@ -40,8 +40,7 @@ with open('login/password.txt', 'w') as filepassword:
 
 if useTOTP:
     print('TOTP 2FA Setup (disable useTOTP in config.py to skip)')
-    print('TOTP Secret: ', end='')
-    totpsecret = input()
+    totpsecret = getpass.getpass('TOTP Secret: ', stream=None)
 
     # write the totp secret to login/totpsecret.txt
     with open('login/totpsecret.txt', 'w') as filetotpsecret:
