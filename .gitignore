@@ -2,4 +2,5 @@
 username.txt
 password.txt
 totpsecret.txt
+login/
 __pycache__
