@@ -21,7 +21,7 @@ sendDiscordNotification = False
 discordWebhookURL = ""
 # Experimental // Development
 # RPC Integration
-discordRPC = False
+discordRPC = True
 # File to save results to, leave as "None" to disable
 resultFile = "None"
 # Email Notification with results

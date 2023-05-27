@@ -1,1 +1,2 @@
 pyotp>=2.8.0
+pypresence>=4.2.0

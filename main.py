@@ -61,13 +61,21 @@ def autoregister():
             # may add BSD support in the future
             print(platform + ' is not supported.')
 
+        # add another useless feature: discord rich presence
+        if discordRPC:
+            from pypresence import Presence
+            RPC = Presence('1111876285938020493')
+            # with state 'Logging in,' large image 'sniper', large text 'LionPath Sniper', and start time as current time, and a button called 'LionPath Sniper' that links to the github page
+            RPC.connect()
+            currentstate='Logging in...'
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+
         # we need to maximize the window so that all elements are visible
         driver.maximize_window()
         lionpath = "https://lionpath.psu.edu/"
         enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
         driver.get(enrollmentPage)
 
-        # TODO: Encrypt username, password and totp secret
         # grab username from file
         usernameFile = open('login/username.txt', 'r')
         username = usernameFile.read()
@@ -136,6 +144,10 @@ def autoregister():
         # Wait for the iframe to become visible
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
 
+        if discordRPC:
+            currentstate='Selecting semester'
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+
         # Switch to the iframe
         driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
 
@@ -163,11 +175,18 @@ def autoregister():
         # Go directly to the shopping cart url
         driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true')
 
+        if discordRPC:
+            currentstate='In shopping cart'
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
+
         # refresh to unglitch the page
         driver.refresh()
 
         if datetime.datetime.now().hour != 0 and waitUntil12AM:
             print('Waiting for 12AM')
+            if discordRPC:
+                currentstate='Waiting for 12AM'
+                RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
             # Wait until 12AM
             while datetime.datetime.now().hour != 0:
                 # check if the "Your session is about to expire" popup is visible
@@ -224,6 +243,10 @@ def autoregister():
 
         # Wait for the loading screen to go away
         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
+
+        if discordRPC:
+            currentstate='Viewing results'
+            RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time(), buttons=[{"label": "View Repository", "url": "https://github.com/dylankrish/lionpath-sniper"}])
 
         # check if the fail ID is displayed
         for i in range(len(checkboxList)):
