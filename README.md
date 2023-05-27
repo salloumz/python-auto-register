@@ -44,6 +44,7 @@ You can configure the script by editing the `config.py` file. The following opti
 - `radnum`: Which semester to enroll in (which radio button to click starting from 1)
 - `waitUntil12AM`: Wait for 12AM to enroll (for waiting for registration to open)
 - `waitTimerEnable`: Wait until 3 minutes before 12AM to start the script (saves resources, but you can disable this to run the script manually)
+- `restartOnError`: Restart the script if an error occurs (for example, if you get logged out of LionPath)
 - `darkMode`: Dark Mode (sets the browser to dark mode, also sets the LionPath website to dark mode)
 - `useTOTP`: TOTP Support for 2FA (TOTP must be enabled and set as the default method on your Microsoft account for this to work)
 - `useBrave`: Brave Browser Support

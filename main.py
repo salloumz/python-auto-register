@@ -279,7 +279,6 @@ def autoregister():
         driver.close
 
     except Exception as e:
-        # TODO: add cases for different exceptions
         print(e)
         if sendDiscordNotification:
             try:
@@ -300,8 +299,13 @@ def autoregister():
                 requests.post(discordWebhookURL, json = data)
             except:
                 pass
-        driver.close()
-        autoregister()
+        if restartOnError:
+            driver.close()
+            autoregister()
+        else:
+            input('Press enter to close the program.')
+            driver.close()
+            exit()
 
 def waitTimer():
     while True:
