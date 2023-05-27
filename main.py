@@ -258,6 +258,10 @@ def autoregister():
             currentstate='Viewing results'
             RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
+        if exportResults:
+            with open('results.csv', 'a') as f:
+                f.write("Class Name" + ',' + "Result Message" + '\n')
+
         # check if the fail ID is displayed
         for i in range(len(checkboxList)):
             classObj = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
