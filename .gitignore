@@ -5,3 +5,4 @@ totpsecret.txt
 login/
 __pycache__
 logininfo.py
+results.csv
