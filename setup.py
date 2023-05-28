@@ -3,7 +3,6 @@ import pyotp
 import getpass
 import shutil
 import os
-from cryptography.fernet import Fernet
 from config import useTOTP
 
 print('Welcome to LionPath Sniper Setup!')
