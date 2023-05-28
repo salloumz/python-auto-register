@@ -70,7 +70,7 @@ def autoregister():
             RPC = Presence('1111876285938020493')
             # with state 'Logging in,' large image 'sniper', large text 'LionPath Sniper', and start time as current time, and a button called 'LionPath Sniper' that links to the github page
             RPC.connect()
-            currentstate='Logging in...'
+            currentstate='Logging in'
             RPC.update(state=currentstate, large_image='sniperrpc', large_text='LionPath Sniper', start=time.time())
 
         # TODO: fix chromedriver not connecting
