@@ -80,24 +80,7 @@ def autoregister():
         enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
         driver.get(enrollmentPage)
 
-        # # grab username from file
-        # usernameFile = open('username.txt', 'r')
-        # username = usernameFile.read()
-        # usernameFile.close()
-
-        # # get password from file
-        # passwordFile = open('password.txt', 'r')
-        # password = passwordFile.read()
-        # passwordFile.close()
-
-        # if useTOTP:
-        #     # get totp token from file
-        #     totpfile = open('totpsecret.txt', 'r')
-        #     totpsecret = totpfile.read()
-        #     totpfile.close()
-
         # Login
-
         # Wait for login page
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'loginfmt')))
 
