@@ -1,4 +1,3 @@
-# TODO: add github actions workflow
 # TODO: use find_elements rather than find_element with a try catch exception 
 # Enable Raised Exceptions in vscode for debugging
 from selenium import webdriver
