@@ -61,7 +61,6 @@ def autoregister():
             else:
                 driver = webdriver.Chrome(options=options)
         else:
-            # may add BSD support in the future
             print(platform + ' is not supported.')
 
         # add another useless feature: discord rich presence
