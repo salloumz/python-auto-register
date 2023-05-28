@@ -163,10 +163,6 @@ def autoregister():
         # create a list of all the buttons and iterate through them
         radioList = []
         while True:
-            # try:
-            #     radioList.append(driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'))
-            # except:
-            #     break
             if driver.find_elements(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'):
                 radioList.append(driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'))
             else:
@@ -203,18 +199,12 @@ def autoregister():
             while datetime.datetime.now().hour != 0:
                 # check if the "Your session is about to expire" popup is visible
                 # if it is, run javascript:pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();
-                try: 
-                    driver.find_element(By.ID, '#ICOK').is_displayed()
+                if driver.find_elements(By.ID, '#ICOK'):
                     driver.execute_script('pingServer("https://www.lionpath.psu.edu/psc/CSPRD_2/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true");setupTimeout2();closeLastModal();')
-                except:
-                    pass
                 # check if the "Your session has expired" popup is visible
                 # if it is, raise an exception to stop execution
-                try:
-                    driver.find_element(By.XPATH, '//*[@id="login"]/div/div/div/p[4]/a').is_displayed()
+                if driver.find_elements(By.XPATH, '//*[@id="login"]/div/div/div/p[4]/a'):
                     raise Exception('Your session has expired. Please log in again.')
-                except:
-                    pass
                 # increase interval if the program is using too many resources
                 time.sleep(0.1)
 
@@ -231,9 +221,9 @@ def autoregister():
         # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
         checkboxList = []
         while True:
-            try:
+            if driver.find_elements(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))):
                 checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
-            except:
+            else:
                 break
         # click all the checkboxes in the list
         for i in range(len(checkboxList)):
