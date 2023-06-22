@@ -14,6 +14,7 @@ import hashlib
 import pyotp
 from selenium.webdriver.chrome.service import Service
 from config import *
+# TODO: check for logininfo file
 from logininfo import *
 
 def autoregister():
