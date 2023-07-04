@@ -49,7 +49,6 @@ You can configure the script by editing the `config.py` file. The following opti
 - `useTOTP`: TOTP Support for 2FA (TOTP must be enabled and set as the default method on your Microsoft account for this to work)
 - `useBrave`: Brave Browser Support
 - `useEdge`: Microsoft Edge Support
-- `discordRPC`: Discord Rich Presence Integration (shows activity in Discord)
 - `sendDiscordNotification`: Discord Webhook Integration (sends enrollment results to Discord via a webhook)
 - `discordWebhookURL`: Discord Webhook URL (the webhook URL to send enrollment results to)
 

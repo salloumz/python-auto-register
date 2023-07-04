@@ -16,8 +16,6 @@ useTOTP = True
 useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
 useEdge = True
-# RPC Integration
-discordRPC = True
 # Discord Webhook Integration
 sendDiscordNotification = False
 # Discord Webhook URL
