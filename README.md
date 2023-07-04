@@ -1,7 +1,4 @@
 # LionPath Sniper
-<div align="left" width="100%">
-    <img src="./assets/sniperlogo.png" width="2000" alt="" />
-</div>
 
 LionPath Sniper is an open-source easy-to-use Python auto register script for LionPath.
 
