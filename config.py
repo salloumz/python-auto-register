@@ -23,6 +23,8 @@ discordWebhookURL = ""
 # File to save results to, leave as "None" to disable
 exportResults = True
 # Experimental // Development
+# Home Assistant Notification
+sendHASSNotification = False
 # Email Notification with results
 sendEmailNotification = False
 # Email Address to send results to
