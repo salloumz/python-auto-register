@@ -1,5 +1,4 @@
 # TODO: pytest support
-# TODO: use find_elements rather than find_element with a try catch exception 
 # TODO: add home assistant integration
 # Enable Raised Exceptions in vscode for debugging
 from selenium import webdriver
@@ -231,7 +230,7 @@ def autoregister():
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
                     # send a discord notification
                     data = {
-                        "username" : "LionPath Sniper",
+                        "username" : "LionPath WebSniper",
                     }
                     data["embeds"] = [
                         {
@@ -256,7 +255,7 @@ def autoregister():
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
                     # send a discord notification
                     data = {
-                        "username" : "LionPath Sniper",
+                        "username" : "LionPath WebSniper",
                     }
                     data["embeds"] = [
                         {
@@ -281,7 +280,7 @@ def autoregister():
                 timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
                 # send a discord notification
                 data = {
-                    "username" : "LionPath Sniper",
+                    "username" : "LionPath WebSniper",
                 }
                 data["embeds"] = [
                     {
