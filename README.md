@@ -1,6 +1,6 @@
 # LionPath Sniper
 
-LionPath Sniper is an open-source easy-to-use Python auto register script for LionPath.
+LionPath Sniper is an easy-to-use Python auto register script for LionPath.
 
 <img src="./assets/Screenshot.png" width="900" alt="" />
 
@@ -15,7 +15,6 @@ Features
 - Dark Mode (sets the browser to dark mode as well as the LionPath website)
 - Automatically detects the amount of classes you want to enroll in
 - Discord Integration (Send enrollment results to Discord via a webhook)
-- 100% free and open-source
 
 Installation
 --
@@ -62,9 +61,5 @@ You can learn more about Discord webhooks [here](https://support.discord.com/hc/
 
 Contribute
 --
-Contributions are always welcome! If you have any ideas or suggestions, please create an issue or a pull request.
+If you have any ideas or suggestions, please create an issue or a pull request.
 Recommended environment: [python3](https://www.python.org/downloads/) + [Visual Studio Code](https://code.visualstudio.com/) + [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
-
-Star me on GitHub!
---
-If you like this project and found it useful, please consider giving it a star on GitHub and sharing it with your friends!
