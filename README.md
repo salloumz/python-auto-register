@@ -58,7 +58,7 @@ This script is configured to send your enrollment results to Discord via a webho
 5. Paste the webhook URL into the `discordWebhookURL` option in the `config.py` file.
 
 You can learn more about Discord webhooks [here](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
-
+<!-- need to add faq later -->
 Contribute
 --
 If you have any ideas or suggestions, please create an issue or a pull request.
