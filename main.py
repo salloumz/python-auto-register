@@ -203,8 +203,8 @@ def autoregister():
         driver.execute_script("oParentWin.submitAction_win2(oParentWin.document.win2, '#ICYes');closeMsg(null,modId);")
 
         # Check if any classes failed to enroll
-        # success id = win0divDERIVED_REGFRM1_DESCRLONG$x where x is a number
-        # fail id = win2divDERIVED_REGFRM1_DESCRLONG$x where x is a number
+        # success gif = /cs/CSPRD/cache/PS_CS_STATUS_SUCCESS_ICN_1.gif
+        # fail gif = /cs/CSPRD/cache/PS_CS_STATUS_ERROR_ICN_1.gif
 
         # Wait for the loading screen to go away
         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
@@ -215,14 +215,35 @@ def autoregister():
 
         # check if the fail ID is displayed
         for i in range(len(checkboxList)):
-            classObj = driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))
-            className = classObj.text
+            # get the class name
+            className = (driver.find_element(By.ID, 'DERIVED_REGFRM1_DESCRLONG$' + str(i))).text
+            # for the message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the fail message by itself
+            message = (driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")).splitlines()[2:-2][0]
             # check to see if the class was fail or success
-            # if the fail element exists
-            if driver.find_elements(By.ID, 'win2divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
-                divHTML = driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
-                # for the fail message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the fail message by itself
-                failMessage = divHTML.splitlines()[2:-2][0]
+            # if the fail gif exists
+            if message == "This class has been added to your schedule.":
+                print("\"" + className + "\" enrolled successfully")
+                if sendDiscordNotification:
+                    import requests
+                    # timestamp
+                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+                    # send a discord notification
+                    data = {
+                        "username" : "LionPath WebSniper",
+                    }
+                    data["embeds"] = [
+                        {
+                            "title" : ":white_check_mark: **" + className + "**",
+                            "description" : "**" + message + "**\n\n" + str(timestamp),
+                            "color" : 0x00ff00
+                        }
+                    ]
+                    requests.post(discordWebhookURL, json = data)
+                if exportResults:
+                    with open('results.csv', 'a') as f:
+                        f.write(className + ',' + message + '\n')
+            # else if error
+            else:
                 print("\"" + className + "\" failed to enroll")
                 if sendDiscordNotification:
                     import requests
@@ -235,39 +256,14 @@ def autoregister():
                     data["embeds"] = [
                         {
                             "title" : ":x: **" + className + "**",
-                            "description" : "**" + failMessage + "**\n\n" + str(timestamp),
+                            "description" : "**" + message + "**\n\n" + str(timestamp),
                             "color" : 0xff0000
                         }
                     ]
                     requests.post(discordWebhookURL, json = data)
                 if exportResults:
                     with open('results.csv', 'a') as f:
-                        f.write(className + ',' + failMessage + '\n')
-            # else if the success element exists
-            elif driver.find_elements(By.ID, 'win0divDERIVED_REGFRM1_DESCRLONG$' + str(i)):
-                divHTML = driver.find_element(By.ID, 'win0divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")
-                # for the success message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the success message by itself
-                successMessage = divHTML.splitlines()[2:-2][0]
-                print("\"" + className + "\" enrolled successfully")
-                if sendDiscordNotification:
-                    import requests
-                    # timestamp
-                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
-                    # send a discord notification
-                    data = {
-                        "username" : "LionPath WebSniper",
-                    }
-                    data["embeds"] = [
-                        {
-                            "title" : ":heavy_check_mark: **" + className + "**",
-                            "description" : "**" + successMessage + "**\n\n" + str(timestamp),
-                            "color" : 0x00ff00
-                        }
-                    ]
-                    requests.post(discordWebhookURL, json = data)
-                if exportResults:
-                    with open('results.csv', 'a') as f:
-                        f.write(className + ',' + successMessage + '\n')
+                        f.write(className + ',' + message + '\n')
         input('Finished. Press enter to close the program.')
         driver.close
 
