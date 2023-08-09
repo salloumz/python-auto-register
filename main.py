@@ -280,7 +280,7 @@ def autoregister():
                 }
                 data["embeds"] = [
                     {
-                        "title" : ":warning: **An error occured in the main function**",
+                        "title" : ":warning: **An error occured**",
                         "description" : "**" + str(e) + "**\n\n" + str(timestamp),
                         "color" : 0xffff00
                     }
