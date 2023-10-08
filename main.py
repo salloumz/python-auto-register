@@ -175,9 +175,15 @@ def autoregister():
         driver.refresh()
 
         # Wait for the enroll button to appear
-        while not driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]').is_displayed():
-            # refresh the page
-            print('Waiting for enroll button to appear')
+        # while not driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]').is_displayed():
+        #     # refresh the page
+        #     print('Waiting for enroll button to appear')
+        #     driver.refresh()
+        # HACK: wait for the enroll button to appear
+        try:
+            if driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]'):
+                pass
+        except:
             driver.refresh()
 
         # create a list of all the checkboxes
