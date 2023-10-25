@@ -180,11 +180,12 @@ def autoregister():
         #     print('Waiting for enroll button to appear')
         #     driver.refresh()
         # HACK: wait for the enroll button to appear
-        try:
-            if driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]'):
-                pass
-        except:
-            driver.refresh()
+        while True:
+            try:
+                if driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]'):
+                    break
+            except:
+                driver.refresh()
 
         # create a list of all the checkboxes
         # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
