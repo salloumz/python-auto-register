@@ -91,6 +91,12 @@ def autoregister():
         # Send enter key
         driver.find_element(By.NAME, 'passwd').send_keys(u'\ue007')
 
+        # fix "please enter your password"
+        if driver.find_elements(By.ID, 'passwordError'):
+            # enter password again
+            driver.find_element(By.NAME, 'passwd').send_keys(password)
+            driver.find_element(By.NAME, 'passwd').send_keys(u'\ue007')
+
         if useTOTP:
             # Wait for totp page
             WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, 'otc')))
