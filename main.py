@@ -186,6 +186,7 @@ def autoregister():
         #     print('Waiting for enroll button to appear')
         #     driver.refresh()
         # HACK: wait for the enroll button to appear
+        # TODO: test .is_displayed() rather than try except
         while True:
             try:
                 if driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]'):
