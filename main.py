@@ -312,6 +312,7 @@ def autoregister():
             exit()
 
 def waitTimer():
+    print('Idle until 11:57 PM')
     while True:
         time.sleep(1)
         # wait until 11:57 PM, 3 minutes before the registration window opens
