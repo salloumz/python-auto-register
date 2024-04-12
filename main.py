@@ -313,6 +313,7 @@ def autoregister():
 
 def waitTimer():
     print('Idle until 11:57 PM')
+    # FIXME: display must be on to run the program
     while True:
         time.sleep(1)
         # wait until 11:57 PM, 3 minutes before the registration window opens
