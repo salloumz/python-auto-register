@@ -350,7 +350,7 @@ def autoregister():
                 server.sendmail(username,emailAddress,msg.as_string())
                 server.quit()
             except Exception as e:
-                print("Failed to send the email:" + e)
+                print("Failed to send the email:" + str(e))
                 import traceback
                 traceback.print_exc()
                 pass
