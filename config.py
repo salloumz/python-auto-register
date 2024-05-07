@@ -21,13 +21,13 @@ sendDiscordNotification = False
 discordWebhookURL = ""
 # File to save results to, leave as "None" to disable
 exportResults = True
-# Experimental // Development
 # Ntfy Notification
 sendntfyNotification = False
 ntfyURL = "https://ntfy.example.com/python-auto-register"
 ntfyRequiresAuth = False
 ntfyUser = ""
 ntfyPswd = ""
+# Experimental // Development
 # Email Notification with results
 sendEmailNotification = False
 emailAddress = ""
