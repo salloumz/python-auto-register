@@ -254,6 +254,13 @@ def autoregister():
                         }
                     ]
                     requests.post(discordWebhookURL, json = data)
+                if sendntfyNotification:
+                    requests.post(ntfyURL,
+                    data=message,
+                    headers={
+                        "Title": className,
+                        "Tags": "heavy_check_mark"
+                    })
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
@@ -276,6 +283,13 @@ def autoregister():
                         }
                     ]
                     requests.post(discordWebhookURL, json = data)
+                if sendntfyNotification:
+                    requests.post(ntfyURL,
+                    data=message,
+                    headers={
+                        "Title": className,
+                        "Tags": "x"
+                    })
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
