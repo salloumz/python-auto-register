@@ -273,7 +273,7 @@ def autoregister():
                     requests.post(discordWebhookURL, json = data)
                 if sendntfyNotification:
                     if ntfyRequiresAuth:
-                        authHeader = "Basic " + base64.b64encode((username + ":" + password).encode()).decode()
+                        authHeader = "Basic " + base64.b64encode((ntfyUser + ":" + ntfyPswd).encode()).decode()
                         requests.post(ntfyURL,
                         data=message,
                         headers={
@@ -314,7 +314,7 @@ def autoregister():
                     requests.post(discordWebhookURL, json = data)
                 if sendntfyNotification:
                     if ntfyRequiresAuth:
-                        authHeader = "Basic " + base64.b64encode((username + ":" + password).encode()).decode()
+                        authHeader = "Basic " + base64.b64encode((ntfyUser + ":" + ntfyPswd).encode()).decode()
                         requests.post(ntfyURL,
                         data=message,
                         headers={
