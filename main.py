@@ -1,22 +1,29 @@
 # TODO: pytest support
-# TODO: add home assistant integration
 # Enable Raised Exceptions in vscode for debugging
+# TODO: conditional imports
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
+from selenium.webdriver.chrome.service import Service
 from sys import platform
 import time
 import datetime
 import hashlib
 import pyotp
 import base64
-from selenium.webdriver.chrome.service import Service
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 from config import *
 # TODO: check for logininfo file
 from logininfo import *
+
+# TODO: handle discord and ntfy exceptions (for ex if an internet outage has occurred)
+# TODO: handle SMTP authentication failure
 
 def autoregister():
     # TODO: add chrome headless support
@@ -224,9 +231,22 @@ def autoregister():
         # Wait for the loading screen to go away
         WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win2')))
 
+        # timestamp
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+
+        if sendEmailNotification:
+            emailMessage = f"""
+            Hello,
+
+            Here are the results of your attempted enrollment as of {timestamp}
+
+
+            """
+
         if exportResults:
             with open('results.csv', 'a') as f:
-                f.write("Class Name" + ',' + "Result Message" + '\n')
+                f.write("Class Name" + ',' + "Result Message" + ',' + timestamp + '\n')
+
 
         # check if the fail ID is displayed
         for i in range(len(checkboxList)):
@@ -239,8 +259,6 @@ def autoregister():
                 print("\"" + className + "\" enrolled successfully")
                 if sendDiscordNotification:
                     import requests
-                    # timestamp
-                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
                     # send a discord notification
                     data = {
                         "username" : "LionPath WebSniper",
@@ -270,6 +288,10 @@ def autoregister():
                             "Title": className,
                             "Tags": "heavy_check_mark"
                         })
+                if sendEmailNotification:
+                    emailMessage += f"""
+                    ✅ {className} - {message}
+                    """
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
@@ -278,8 +300,6 @@ def autoregister():
                 print("\"" + className + "\" failed to enroll")
                 if sendDiscordNotification:
                     import requests
-                    # timestamp
-                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
                     # send a discord notification
                     data = {
                         "username" : "LionPath WebSniper",
@@ -309,14 +329,33 @@ def autoregister():
                             "Title": className,
                             "Tags": "x"
                         })
+                if sendEmailNotification:
+                    emailMessage += f"""
+                    ❌ {className} - {message}
+                    """
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
+        if sendEmailNotification:
+            msg = MIMEMultipart()
+            msg['Subject'] = "LionPath WebSniper Enrollment Results"
+            msg['From'] = username
+            msg['To'] = emailAddress
+            msg.attach(MIMEText(emailMessage, 'plain'))
+            server = smtplib.SMTP(smtpServer,smtpPort)
+            if smtpTLS:
+                server.starttls()
+            server.login(username,password)
+            server.sendmail(username,emailAddress,msg.as_string())
+            server.quit()
+
         input('Finished. Press enter to close the program.')
         driver.close
 
     except Exception as e:
         print(e)
+        import traceback
+        traceback.print_exc()
         if sendDiscordNotification:
             try:
                 import requests
