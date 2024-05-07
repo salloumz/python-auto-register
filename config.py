@@ -34,5 +34,6 @@ emailAddress = ""
 # SMTP Settings for email notification
 smtpServer = ""
 smtpPort = 0
+smtpTLS = True
 smtpUsername = ""
 smtpPassword = ""
