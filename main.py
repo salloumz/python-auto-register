@@ -346,8 +346,8 @@ def autoregister():
                 server = smtplib.SMTP(smtpServer,smtpPort)
                 if smtpTLS:
                     server.starttls()
-                server.login(username,password)
-                server.sendmail(username,emailAddress,msg.as_string())
+                server.login(smtpUsername,smtpPassword)
+                server.sendmail(smtpUsername,emailAddress,msg.as_string())
                 server.quit()
             except Exception as e:
                 print("Failed to send the email:" + str(e))
