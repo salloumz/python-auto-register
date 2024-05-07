@@ -356,25 +356,6 @@ def autoregister():
         print(e)
         import traceback
         traceback.print_exc()
-        if sendDiscordNotification:
-            try:
-                import requests
-                # timestamp
-                timestamp = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
-                # send a discord notification
-                data = {
-                    "username" : "LionPath WebSniper",
-                }
-                data["embeds"] = [
-                    {
-                        "title" : ":warning: **An error occured**",
-                        "description" : "**" + str(e) + "**\n\n" + str(timestamp),
-                        "color" : 0xffff00
-                    }
-                ]
-                requests.post(discordWebhookURL, json = data)
-            except:
-                pass
         if restartOnError:
             driver.close()
             autoregister()
