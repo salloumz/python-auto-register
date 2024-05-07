@@ -25,6 +25,9 @@ exportResults = True
 # Ntfy Notification
 sendntfyNotification = False
 ntfyURL = "https://ntfy.example.com/python-auto-register"
+ntfyRequiresAuth = False
+ntfyUser = ""
+ntfyPswd = ""
 # Email Notification with results
 sendEmailNotification = False
 emailAddress = ""

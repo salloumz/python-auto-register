@@ -12,6 +12,7 @@ import time
 import datetime
 import hashlib
 import pyotp
+import base64
 from selenium.webdriver.chrome.service import Service
 from config import *
 # TODO: check for logininfo file
@@ -255,12 +256,22 @@ def autoregister():
                     ]
                     requests.post(discordWebhookURL, json = data)
                 if sendntfyNotification:
-                    requests.post(ntfyURL,
-                    data=message,
-                    headers={
-                        "Title": className,
-                        "Tags": "heavy_check_mark"
-                    })
+                    if ntfyRequiresAuth:
+                        authHeader = "Basic " + base64.b64encode((username + ":" + password).encode()).decode()
+                        requests.post(ntfyURL,
+                        data=message,
+                        headers={
+                            "Title": className,
+                            "Tags": "heavy_check_mark",
+                            "Authorization": authHeader
+                        })
+                    else:
+                        requests.post(ntfyURL,
+                        data=message,
+                        headers={
+                            "Title": className,
+                            "Tags": "heavy_check_mark"
+                        })
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
@@ -284,12 +295,22 @@ def autoregister():
                     ]
                     requests.post(discordWebhookURL, json = data)
                 if sendntfyNotification:
-                    requests.post(ntfyURL,
-                    data=message,
-                    headers={
-                        "Title": className,
-                        "Tags": "x"
-                    })
+                    if ntfyRequiresAuth:
+                        authHeader = "Basic " + base64.b64encode((username + ":" + password).encode()).decode()
+                        requests.post(ntfyURL,
+                        data=message,
+                        headers={
+                            "Title": className,
+                            "Tags": "x",
+                            "Authorization": authHeader
+                        })
+                    else:
+                        requests.post(ntfyURL,
+                        data=message,
+                        headers={
+                            "Title": className,
+                            "Tags": "x"
+                        })
                 if exportResults:
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
