@@ -18,16 +18,15 @@ useBrave = False
 useEdge = True
 # Discord Webhook Integration
 sendDiscordNotification = False
-# Discord Webhook URL
 discordWebhookURL = ""
 # File to save results to, leave as "None" to disable
 exportResults = True
 # Experimental // Development
-# Home Assistant Notification
-sendHASSNotification = False
+# Ntfy Notification
+sendntfyNotification = False
+ntfyURL = ""
 # Email Notification with results
 sendEmailNotification = False
-# Email Address to send results to
 emailAddress = ""
 # SMTP Settings for email notification
 smtpServer = ""
