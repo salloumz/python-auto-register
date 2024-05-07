@@ -235,9 +235,7 @@ def autoregister():
             # for the message, we need to get rid of the top 2 lines and the last 2 lines, and convert the index 0 to a string to get the fail message by itself
             message = (driver.find_element(By.ID, 'win2divDERIVED_REGFRM1_SS_MESSAGE_LONG$' + str(i)).get_attribute("innerHTML")).splitlines()[2:-2][0]
             # check to see if the class was fail or success
-            # if the fail gif exists
-	    # TODO: add "You have already taken this class. When graded this course may be subject to repeat rules. Verify that the class will apply toward your course of study." (we may have to just check for the green check mark)
-            if message == "This class has been added to your schedule." or message == "The pre-requisite has been met conditionally. The enrollment is allowed with the condition of satisfying the pre-requisite before the start of the class.":
+            if message == "This class has been added to your schedule." or message == "The pre-requisite has been met conditionally. The enrollment is allowed with the condition of satisfying the pre-requisite before the start of the class." or message == "You have already taken this class. When graded this course may be subject to repeat rules. Verify that the class will apply toward your course of study.":
                 print("\"" + className + "\" enrolled successfully")
                 if sendDiscordNotification:
                     import requests
