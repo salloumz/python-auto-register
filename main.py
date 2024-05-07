@@ -337,17 +337,24 @@ def autoregister():
                     with open('results.csv', 'a') as f:
                         f.write(className + ',' + message + '\n')
         if sendEmailNotification:
-            msg = MIMEMultipart()
-            msg['Subject'] = "LionPath WebSniper Enrollment Results"
-            msg['From'] = username
-            msg['To'] = emailAddress
-            msg.attach(MIMEText(emailMessage, 'plain'))
-            server = smtplib.SMTP(smtpServer,smtpPort)
-            if smtpTLS:
-                server.starttls()
-            server.login(username,password)
-            server.sendmail(username,emailAddress,msg.as_string())
-            server.quit()
+            try:
+                msg = MIMEMultipart()
+                msg['Subject'] = "LionPath WebSniper Enrollment Results"
+                msg['From'] = username
+                msg['To'] = emailAddress
+                msg.attach(MIMEText(emailMessage, 'plain'))
+                server = smtplib.SMTP(smtpServer,smtpPort)
+                if smtpTLS:
+                    server.starttls()
+                server.login(username,password)
+                server.sendmail(username,emailAddress,msg.as_string())
+                server.quit()
+            except Exception as e:
+                print("Failed to send the email:" + e)
+                import traceback
+                traceback.print_exc()
+                pass
+
 
         input('Finished. Press enter to close the program.')
         driver.close
