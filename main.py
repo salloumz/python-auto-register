@@ -214,6 +214,32 @@ def autoregister():
         for i in range(len(checkboxList)):
             ActionChains(driver).click(checkboxList[i - 1]).perform()
 
+        # experimental javascript function
+        # clickall = """
+        # (function() {
+            # // converted code to JS
+            # let checkboxList = [];
+            # let i = 0;
+# 
+            # // checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
+            # while (true) {
+                # let checkbox = document.getElementById('DERIVED_REGFRM1_SSR_SELECT$' + i);
+                # if (checkbox) {
+                    # checkboxList.push(checkbox);
+                    # i++;
+                # } else {
+                    # break;
+                # }
+            # }
+# 
+            # // click all the checkboxes in the list
+            # checkboxList.forEach((checkbox) => {
+                # checkbox.click();
+            # });
+        # })();
+        # """
+        # driver.execute_script(clickall)
+
         # Hit the enroll button
         # Run the javascript to click the enroll button
         driver.execute_script("javascript:submitAction_win2(document.win2,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
