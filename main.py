@@ -204,41 +204,41 @@ def autoregister():
 
         # create a list of all the checkboxes
         # checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
-        checkboxList = []
-        while True:
-            if driver.find_elements(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))):
-                checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
-            else:
-                break
+        # checkboxList = []
+        # while True:
+            # if driver.find_elements(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))):
+                # checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
+            # else:
+                # break
         # click all the checkboxes in the list
-        for i in range(len(checkboxList)):
-            ActionChains(driver).click(checkboxList[i - 1]).perform()
+        # for i in range(len(checkboxList)):
+            # ActionChains(driver).click(checkboxList[i - 1]).perform()
 
         # experimental javascript function
-        # clickall = """
-        # (function() {
-            # // converted code to JS
-            # let checkboxList = [];
-            # let i = 0;
-# 
-            # // checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
-            # while (true) {
-                # let checkbox = document.getElementById('DERIVED_REGFRM1_SSR_SELECT$' + i);
-                # if (checkbox) {
-                    # checkboxList.push(checkbox);
-                    # i++;
-                # } else {
-                    # break;
-                # }
-            # }
-# 
-            # // click all the checkboxes in the list
-            # checkboxList.forEach((checkbox) => {
-                # checkbox.click();
-            # });
-        # })();
-        # """
-        # driver.execute_script(clickall)
+        clickall = """
+        (function() {
+            // converted code to JS
+            let checkboxList = [];
+            let i = 0;
+
+            // checkboxes are in the format DERIVED_REGFRM1_SSR_SELECT$x where x is the number of the checkbox starting from 0
+            while (true) {
+                let checkbox = document.getElementById('DERIVED_REGFRM1_SSR_SELECT$' + i);
+                if (checkbox) {
+                    checkboxList.push(checkbox);
+                    i++;
+                } else {
+                    break;
+                }
+            }
+
+            // click all the checkboxes in the list
+            checkboxList.forEach((checkbox) => {
+                checkbox.click();
+            });
+        })();
+        """
+        driver.execute_script(clickall)
 
         # Hit the enroll button
         # Run the javascript to click the enroll button
