@@ -170,6 +170,14 @@ def autoregister():
         # refresh to unglitch the page
         driver.refresh()
 
+        # create checkbox list for result determination (remove if using old method)
+        checkboxList = []
+        while True:
+            if driver.find_elements(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))):
+                checkboxList.append(driver.find_element(By.ID, 'DERIVED_REGFRM1_SSR_SELECT$' + str(len(checkboxList))))
+            else:
+                break
+
         if datetime.datetime.now().hour != 0 and waitUntil12AM:
             print('Waiting for 12AM')
             # Wait until 12AM
