@@ -22,7 +22,7 @@ Installation
 2. Clone this repository or download the zip file and extract it.
 3. Run the following commands in a terminal:
 ```
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 python3 setup.py
 ```
 You will be taken through the setup process where you will be asked to provide your LionPath credentials, the semester you want to select, and other options.
