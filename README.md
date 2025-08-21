@@ -1,6 +1,6 @@
-# LionPath WebSniper (formally python-auto-register)
+# LionPath Python Auto Register
 
-LionPath WebSniper is an easy-to-use Python auto register script for LionPath.
+LionPath Python Auto Register is an easy-to-use Python auto register script for LionPath.
 
 <img src="./assets/Screenshot.png" width="900" alt="" />
 
