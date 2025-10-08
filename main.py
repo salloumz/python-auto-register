@@ -76,7 +76,7 @@ def autoregister():
         # we need to maximize the window so that all elements are visible
         driver.maximize_window()
         lionpath = "https://lionpath.psu.edu/"
-        enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_AGSTARTPAGE_NUI.GBL?CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=PE_PT_NVF_ENROLLMENT&PanelCollapsible=Y&PTPPB_GROUPLET_ID=PE_PT_NVI_ENROLLMENT&CRefName=PE_PT_NVI_ENROLLMENT&AJAXTransfer=y"
+        enrollmentPage = "https://www.lionpath.psu.edu/psc/CSPRD_7/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true"
         driver.get(enrollmentPage)
 
         # Login
@@ -127,45 +127,27 @@ def autoregister():
                 if driver.find_elements(By.ID, 'ViewDetails'):
                     raise Exception('You didn\'t enter an expected verification code. Please try again.')
                 # if the view details button is not visible, we are on the enrollment page
-                elif driver.find_elements(By.ID, 'main_target_win0'):
+                elif driver.find_elements(By.ID, 'win7divPSPAGECONTAINER'):
                     break
         else:
             # wait for the enrollment page
             # TODO: send system notifications?
             print('Please type your 2FA code and continue.')
             while True:
-                if driver.find_elements(By.ID, 'main_target_win0'):
+                if driver.find_elements(By.ID, 'win7divPSPAGECONTAINER'):
                     break
 
         # Wait for the iframe to become visible
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'main_target_win0')))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'win7divPSPAGECONTAINER')))
 
-        # Switch to the iframe
-        driver.switch_to.frame(driver.find_element(By.ID, 'main_target_win0'))
+        buttontoclick = 'win7divDERIVED_SSR_FL_SSR_GRPBOX_TERM$' + str(radnum - 1)
 
-        # we can automatically detect the buttons by using the id's and x
-        # create a list of all the buttons and iterate through them
-        radioList = []
-        while True:
-            if driver.find_elements(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'):
-                radioList.append(driver.find_element(By.ID, 'SSR_DUMMY_RECV1$sels$' + str(len(radioList)) + '$$0'))
-            else:
-                break
-        # pick the radio button using the enrollnum
-        ActionChains(driver).click(radioList[radnum - 1]).perform()
+        semesterButton = driver.find_element(By.ID, buttontoclick)
 
-        # Click continue
-        continueButton = driver.find_element(By.ID, 'DERIVED_SSS_SCT_SSR_PB_GO')
-        continueButton.click()
-
-        # Wait for the loading screen to go away
-        WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.ID, 'WAIT_win0')))
-
-        # get out of the iframe
-        driver.switch_to.default_content()
+        semesterButton.click()
 
         # Go directly to the shopping cart url
-        driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true')
+        # driver.get('https://www.lionpath.psu.edu/psc/CSPRD_newwin/EMPLOYEE/SA/c/SSR_STUDENT_FL.SSR_SHOP_CART_FL.GBL?NavColl=true')
 
         # refresh to unglitch the page
         driver.refresh()
