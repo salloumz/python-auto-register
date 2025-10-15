@@ -11,7 +11,7 @@ restartOnError = True
 # Dark Mode
 darkMode = True
 # TOTP Support (2FA)
-useTOTP = True
+useTOTP = False
 # [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)
 useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
