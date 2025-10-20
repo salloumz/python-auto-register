@@ -187,7 +187,7 @@ def autoregister():
         # TODO: test .is_displayed() rather than try except
         while True:
             try:
-                if driver.find_element(By.XPATH, '//*[@id="DERIVED_SSR_FL_SSR_ENROLL_FL"]'):
+                if driver.find_element(By.XPATH, '//*[@id="win0divDERIVED_SSR_FL_SSR_ENROLL_FL"]'):
                     break
             except:
                 driver.refresh()
