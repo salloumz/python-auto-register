@@ -5,11 +5,11 @@ radnum = 2
 waitUntil12AM = False
 # Wait until 3 minutes before 12AM to start the script
 # TODO: Make time configurable
-waitTimerEnable = False
+waitTimerEnable = True
 # Restart the script if an error occurs
 restartOnError = True
 # Dark Mode
-darkMode = True
+darkMode = False
 # TOTP Support (2FA)
 useTOTP = False
 # [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)

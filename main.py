@@ -111,7 +111,7 @@ def autoregister():
 
             # Create a TOTP object with the given secret
             totp = pyotp.TOTP(totpsecret, digits=6, digest=hashlib.sha1)
-
+    
             # Get the current TOTP code
             totpcode = totp.now()
 
