@@ -5,7 +5,7 @@ radnum = 2
 waitUntil12AM = False
 # Wait until 3 minutes before 12AM to start the script
 # TODO: Make time configurable
-waitTimerEnable = True
+waitTimerEnable = False
 # Restart the script if an error occurs
 restartOnError = True
 # Dark Mode
