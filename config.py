@@ -2,7 +2,7 @@
 # Which semester to enroll in (which radio button to click starting from 1)
 radnum = 2
 # Wait for 12AM to enroll
-waitUntil12AM = True
+waitUntil12AM = False
 # Wait until 3 minutes before 12AM to start the script
 # TODO: Make time configurable
 waitTimerEnable = False
@@ -15,7 +15,7 @@ useTOTP = False
 # [Windows, Mac, Linux] Brave Support (instead of Chrome or Edge)
 useBrave = False
 # [Windows] Microsoft Edge Support (instead of Chrome)
-useEdge = True
+useEdge = False
 # Discord Webhook Integration
 sendDiscordNotification = False
 discordWebhookURL = ""
