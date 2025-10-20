@@ -1,6 +1,6 @@
 # Config Options
 # Which semester to enroll in (which radio button to click starting from 1)
-radnum = 2
+radnum = 1
 # Wait for 12AM to enroll
 waitUntil12AM = False
 # Wait until 3 minutes before 12AM to start the script

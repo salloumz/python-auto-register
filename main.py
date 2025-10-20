@@ -232,7 +232,7 @@ def autoregister():
 
         # Hit the enroll button
         # Run the javascript to click the enroll button
-        driver.execute_script("javascript:submitAction_win2(document.win2,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
+        driver.execute_script("javascript:submitAction_win0(document.win0,'DERIVED_SSR_FL_SSR_ENROLL_FL');")
 
         # Wait for yes button to appear
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="#ICYes"]')))
